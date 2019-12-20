@@ -2,3 +2,4 @@ node_modules
 build
 .tools-versions
 yarn.lock
+*.DS_store
