@@ -1,5 +1,3 @@
-import { TUser, TUsers } from './providers/types'
-import { IController } from '@logic/interfaces'
 import { TResponse } from '@logic/types';
 import { validateInsert } from './providers/validator'
 import { insertOne, getByEmail } from './model';
@@ -50,3 +48,5 @@ export const userByEmail = async (email: string) => {
     }
     return response;
 }
+
+export default { getOne, getAll, deleteOne, insertUser, userByEmail }

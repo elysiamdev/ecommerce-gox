@@ -1,5 +1,5 @@
 import jwt, { sign } from "jsonwebtoken";
-import { apiSecret } from "config";
+import { apiSecret } from "../../config";
 import { TResponse } from "@logic/types";
 import { userByEmail, insertUser } from "@services/users";
 import Mailer from '@services/mailer'
