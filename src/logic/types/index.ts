@@ -11,3 +11,10 @@ export type TJwtToken = {
     isProtected: boolean,
     data: any,
 }
+
+
+export type TEmailOptions = {
+    link: string,
+    imageUrl: string,
+    title: string
+}

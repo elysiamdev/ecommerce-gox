@@ -11,3 +11,7 @@ export const signUpRequest: IHttpExpress = async (req, res, next) => {
     let response = await signUp(req.body)
     res.json(response).status(200)
 }
+
+export const recoveryPasswordRequest: IHttpExpress = async (req, res, next) => {
+
+}

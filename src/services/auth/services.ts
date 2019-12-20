@@ -1,11 +1,11 @@
 import jwt, { sign } from "jsonwebtoken";
 import { apiSecret } from "config";
-import { TJwtToken, TResponse } from "@logic/types";
+import { TResponse } from "@logic/types";
 import { userByEmail, insertUser } from "@services/users";
+import Mailer from '@services/mailer'
 
+export const verifyToken = (token: string) => new Promise((resolve: Function) => (
 
-
-export const verifyToken = (token: string) => new Promise<TJwtToken>((resolve: Function) => (
     jwt.verify(
         token,
         apiSecret,
@@ -59,4 +59,11 @@ export const signIn = async (credentials: any) => {
 
 export const signUp = async (userData: any) => await insertUser(userData)
 
-export default { signIn }
+export const recoveryPassword = async (email: string) => {
+    let user: any = await userByEmail(email);
+    let mailer = new Mailer(user.email, {}, 'recovery')
+    let response = await mailer.sendEmail()
+    return response;
+}
+
+export default { verifyToken, ensureToken, signIn, recoveryPassword }
