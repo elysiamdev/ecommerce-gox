@@ -1,11 +1,13 @@
-export const homeHandler = (req: any, res: any, next: any) => {
+import { IHttpExpress } from "@logic/interfaces"
+
+export const homeHandler: IHttpExpress = (req: any, res: any, next: any) => {
     res.render('site/home')
 }
 
-export const productHandler = (req: any, res: any, next: any) => {
+export const productHandler: IHttpExpress = (req: any, res: any, next: any) => {
     res.render('site/product')
 }
 
-export const contactHandler = (req: any, res: any, next: any) => {
+export const contactHandler: IHttpExpress = (req: any, res: any, next: any) => {
     res.render('site/contact')
 }

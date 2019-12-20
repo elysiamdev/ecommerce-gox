@@ -6,3 +6,8 @@ export type TResponse = {
 }
 
 export type TTableObject = any;
+
+export type TJwtToken = {
+    isProtected: boolean,
+    data: any,
+}

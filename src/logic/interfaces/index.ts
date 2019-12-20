@@ -4,7 +4,9 @@ import { TResponse } from '../types'
 export interface IMiddelware {
     (req: Request, res: Response, next: NextFunction): void
 }
-
+export interface IHttpExpress {
+    (req: Request, res: Response, next: NextFunction): any
+}
 export interface IModelData {
     (data?: any): Promise<any>
 }
