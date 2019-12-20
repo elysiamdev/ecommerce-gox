@@ -1,11 +1,6 @@
 import { Router } from 'express'
 const router = Router()
 import Actions from '../index'
-import ReactDOMServer from 'react-dom/server'
-
-router.get('/react-app', (req, res) => {
-
-})
 
 router.get('/', async (req, res) => {
     res.json({ user: 'home page' })

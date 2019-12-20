@@ -7,9 +7,7 @@ const middlewarePattern: IMiddelware = (req, res, next) => next()
 
 const servicesList = fs.readdirSync(`${rootPath}/services/`);
 
-const requireServices: Array<any> = servicesList.filter((item: string) => {
-    return item != 'index.ts'
-})
+const requireServices: Array<any> = servicesList.filter((item: string) => (item !== 'index.ts' && item !== '.DS_Store'))
 
 let servicesObject: any = {}
 
