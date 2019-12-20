@@ -6,3 +6,5 @@ export const signInRequest: IHttpExpress = async (req, res, next) => {
     let response = await signIn(data)
     res.json(response).status(200)
 }
+
+export const signUpRequest: IHttpExpress

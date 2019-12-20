@@ -1,7 +1,7 @@
 import jwt, { sign } from "jsonwebtoken";
 import { apiSecret } from "config";
 import { TJwtToken, TResponse } from "@logic/types";
-import { userByEmail } from "@services/users";
+import { userByEmail, insertUser } from "@services/users";
 
 
 
@@ -57,8 +57,6 @@ export const signIn = async (credentials: any) => {
 
 }
 
-export const signUp = (userData: any) => {
-
-}
+export const signUp = async (userData: any) => await insertUser(userData)
 
 export default { signIn }

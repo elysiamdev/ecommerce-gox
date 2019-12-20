@@ -1,9 +1,11 @@
 import { Router, Request, Response } from 'express'
 import services from '../services'
+import { signInRequest } from '../request_handlers'
 
 const router = Router()
 
-router.get('/', (req: Request, res: Response) => res.json({ data: '' }))
+router.post('/sign-in', signInRequest)
+router.post('/sign-up', signInRequest)
 
 export { services };
 

@@ -16,7 +16,7 @@ export const deleteOne = async (id: string) => {
     let response: TResponse = {}
     return response;
 }
-export const insert = async <TUser>(user: TUser) => {
+export const insertUser = async <TUser>(user: TUser) => {
     user = { ...user, role: 1 }
     let response: TResponse = {};
     let isValid = validateInsert(user)
