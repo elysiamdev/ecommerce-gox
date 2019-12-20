@@ -9,3 +9,7 @@ export const productHandler = (req: any, res: any, next: any) => {
 export const contactHandler = (req: any, res: any, next: any) => {
     res.render('site/contact')
 }
+
+export const searchHandler = (req: any, res: any, next: any) => {
+    res.render('site/search')
+}
