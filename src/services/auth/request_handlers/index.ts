@@ -1,5 +1,5 @@
 import { IHttpExpress } from "@logic/interfaces";
-import { signIn, signUp, recoveryPassword } from "../services";
+import { signIn, signUp, recoveryPassword } from "../index";
 
 export const signInRequest: IHttpExpress = async (req, res, next) => {
     let data: any = req.body;
