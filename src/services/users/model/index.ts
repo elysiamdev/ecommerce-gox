@@ -6,7 +6,7 @@ export const Users: any = () => knex('users');
 
 export const getAll: IModelData = () => new Promise<TUsers>(resolve => {
     Users().select('*')
-        .then((response: any) => {
+        .then((response: TUsers) => {
             resolve(response)
         })
         .catch((err: any) => {
@@ -43,3 +43,10 @@ export const getByEmail: IModelData = (email: string) => new Promise(resolve => 
             resolve([])
         })
 })
+
+export default {
+    getAll,
+    insertOne,
+    deleteOne,
+    getByEmail
+}
