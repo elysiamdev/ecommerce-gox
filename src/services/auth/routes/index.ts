@@ -6,6 +6,8 @@ const router = Router()
 router.post('/sign-in', signInRequest)
 router.post('/sign-up', signUpRequest)
 
-router.post('/recovery')
+
+// todo
+router.post('/recovery', (req, res) => res.send('recovery request'))
 
 export default router;
