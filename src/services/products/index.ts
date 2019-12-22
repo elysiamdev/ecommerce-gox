@@ -15,7 +15,6 @@ export const insert = async (product: any) => {
     } else {
         return data;
     }
-
 }
 export const getProduct = async (id: any) => {
     let response = await productsModel.getOne(id)
@@ -24,8 +23,11 @@ export const getProduct = async (id: any) => {
 export const updateProduct = async (product: any) => {
     let data = validateUpdate(product);
     if (data.success) {
-        let response = await productsModel.update(product)
-        return response
+        let response: any = await productsModel.update(product)
+        return {
+            success: response.length > 0,
+            data: response
+        }
     } else {
         return data;
     }
@@ -42,7 +44,6 @@ export const deleteProduct = async (id: string) => {
             message: ['missing id!']
         }
     }
-
 }
 export const getAll = async (data: any) => {
     let response: any = await productsModel.getAll()
