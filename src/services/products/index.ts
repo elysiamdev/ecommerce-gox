@@ -1,17 +1,13 @@
 import clientDb from '@logic/clientDb'
 import { validateInsert, validateUpdate } from './helpers/validate'
+import { Product } from './providers/types';
 
-type Product = {
-
-}
-const productsModel = new clientDb('products')
+const productsModel = new clientDb<Product>('products')
 
 export const insert = async (product: any) => {
     let data = validateInsert(product);
     if (data.success) {
-        // validade model here - TODO
         let response = await productsModel.insert(product)
-        // default response - TODO
         return {
             success: true,
             data: response
@@ -36,12 +32,24 @@ export const updateProduct = async (product: any) => {
 
 }
 export const deleteProduct = async (id: string) => {
-    let response = await productsModel.delete(id)
-    return response;
+    if (id) {
+        let response = await productsModel.delete(id)
+        return response;
+    }
+    else {
+        return {
+            success: false,
+            message: ['missing id!']
+        }
+    }
+
 }
 export const getAll = async (data: any) => {
-    let response = await productsModel.getAll()
-    return response
+    let response: any = await productsModel.getAll()
+    return {
+        success: response.length > 0,
+        data: response
+    }
 }
 
 export default {

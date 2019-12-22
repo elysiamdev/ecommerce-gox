@@ -20,7 +20,7 @@ class ClientKnex<T> {
         this.service().select('*')
             .then((response: Array<T>) => resolve(response))
     })
-    update = (data: any) => new Promise(resolve => {
+    update = (data: T) => new Promise(resolve => {
         let dataToUpdate: any = { ...data, id: null }
         delete dataToUpdate.id
         this.service().where('id', data.id).update(data)
