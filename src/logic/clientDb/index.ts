@@ -47,6 +47,14 @@ class ClientKnex<T> {
                 resolve([])
             })
     })
+    getByField = (field: string, value: string) => new Promise(resolve => {
+        this.service().select('*').where(field, value)
+            .then((response: any) => resolve(response))
+            .catch((err: any) => {
+                console.log(err)
+                return resolve(err)
+            })
+    })
 
 }
 

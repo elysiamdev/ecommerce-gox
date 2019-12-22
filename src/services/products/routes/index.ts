@@ -1,5 +1,5 @@
 import { Router } from 'express'
-
+import { getProductsRequest, getProductRequest, updateProductRequest } from '../request_handlers'
 let router = Router()
 
 
@@ -7,8 +7,9 @@ let router = Router()
 const tempHanbdler = () => { }
 
 
-router.get('/products', tempHanbdler)
-router.get('/products/:id', tempHanbdler)
-router.post('/products/:slug-url', tempHanbdler)
+router.get('', getProductsRequest)
+router.get('/:id', getProductRequest)
+router.put('/', updateProductRequest)
+router.post('/:slug-url', tempHanbdler)
 
 export default router;

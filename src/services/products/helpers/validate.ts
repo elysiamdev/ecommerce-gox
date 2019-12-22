@@ -1,56 +1,46 @@
 import validate from 'validate.js'
 
+const product = {
+    name: {
+        presence: true
+    },
+    suplier: {
+        presence: true
+    },
+    dimensions: {
+        presence: true
+    },
+    weight: {
+        presence: true
+    },
+    price_buy: {
+        presence: true
+    },
+    price_sell: {
+        presence: true
+    },
+    quantity: {
+        presence: true
+    },
+    images: {
+        presence: true
+    },
+    categories: {},
+    description: {},
+    details: {},
+    related: {}
+}
+
 const updateOptions = {
     id: {
         presence: true
     },
-    first_name: {
-        presence: true
-    },
-    last_name: {
-        presence: true
-    },
-    password: {
-        presence: true,
-        length: {
-            minimum: 6,
-            message: "Password must be at least 6 characters"
-        }
-    },
-    email: {
-        presence: true,
-        email: true
-    },
-    role: {
-        presence: true
-    }
+    ...product
 }
 
-const insertOptions = {
+const insertOptions = { ...product }
 
-    first_name: {
-        presence: true
-    },
-    last_name: {
-        presence: true
-    },
-    password: {
-        presence: true,
-        length: {
-            minimum: 6,
-            message: "Password must be at least 6 characters"
-        }
-    },
-    email: {
-        presence: true,
-        email: true
-    },
-    role: {
-        presence: true
-    }
-}
+export const validateInsert = (user: any) => validate(user, insertOptions) ? { success: false, data: validate(user, insertOptions) } : { success: true };
 
-export const validateInsert = (user: any) => validate(user, insertOptions) ? validate(user, insertOptions) : false;
-
-export const validateUpdate = (user: any) => validate(user, updateOptions) ? validate(user, updateOptions) : false;
+export const validateUpdate = (user: any) => validate(user, updateOptions) ? { success: false, data: validate(user, updateOptions) } : { success: true };
 

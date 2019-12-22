@@ -8,7 +8,7 @@ import {
 } from '../index'
 
 export const getProductRequest: IHttpExpress = async (req, res, next) => {
-    let response = await getProduct(req.body)
+    let response = await getProduct(req.params.id)
     res.json(response).status(200);
 }
 export const updateProductRequest: IHttpExpress = async (req, res, next) => {
