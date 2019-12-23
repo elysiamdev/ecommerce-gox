@@ -40,7 +40,7 @@ const updateOptions = {
 
 const insertOptions = { ...product }
 
-export const validateInsert = (user: any) => validate(user, insertOptions) ? { success: true } : { success: false, data: validate(user, insertOptions) };
+export const validateInsert = (user: any) => validate(user, insertOptions) ? { success: false, data: validate(user, insertOptions) } : { success: true };
 
 export const validateUpdate = (user: any) => validate(user, updateOptions) ? { success: false, data: validate(user, updateOptions) } : { success: true };
 
