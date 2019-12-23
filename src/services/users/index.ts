@@ -7,7 +7,7 @@ import clientDb from '@logic/clientDb'
 const usersModel = new clientDb('users')
 
 
-export const getOne = async (id: string) => {
+export const getService = async (id: string) => {
     let response: any = await usersModel.getOne(id)
     return {
         success: response.length > 0,
@@ -15,7 +15,7 @@ export const getOne = async (id: string) => {
         message: response.length ? [`${response.length} users found`] : ['Ops! we couldn ot found the user']
     };
 }
-export const getAll = async () => {
+export const getAllService = async () => {
     let response: any = await usersModel.getAll()
     return {
         success: response.length > 0,
@@ -23,14 +23,14 @@ export const getAll = async () => {
         message: [`${response.length} users found`]
     };
 }
-export const deleteOne = async (id: string) => {
+export const deleteService = async (id: string) => {
     let response: any = await usersModel.delete(id)
     return {
         success: response.length > 0,
         message: [`${response.length} users deleted`]
     }
 }
-export const insertUser = async (user: any) => {
+export const insertService = async (user: any) => {
     user = { ...user, role: 1 }
     let data = validateInsert(user)
     if (data.success) {
@@ -61,4 +61,4 @@ export const userByEmail = async (email: string) => {
     return response;
 }
 
-export default { getOne, getAll, deleteOne, insertUser, userByEmail }
+export default { getService, getAllService, deleteService, insertService, userByEmail, updateService }
