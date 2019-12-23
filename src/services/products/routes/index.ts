@@ -1,15 +1,21 @@
 import { Router } from 'express'
-import { getProductsRequest, getProductRequest, updateProductRequest } from '../request_handlers'
+import {
+    getProductsRequest,
+    getProductRequest,
+    updateProductRequest,
+    insertProductRequest,
+    deleteProductRequest,
+    getBySlugRequest
+} from '../request_handlers'
+
 let router = Router()
-
-
-// remove it later 
-const tempHanbdler = () => { }
 
 
 router.get('', getProductsRequest)
 router.get('/:id', getProductRequest)
 router.put('/', updateProductRequest)
-router.post('/:slugUrl', tempHanbdler)
+router.get('/:slugUrl', getBySlugRequest)
+router.post('/', insertProductRequest)
+router.delete('/', deleteProductRequest)
 
 export default router;
