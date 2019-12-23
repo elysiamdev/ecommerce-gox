@@ -8,3 +8,8 @@ export const cleanValidate = (data: any) => {
     return response
 }
 
+export const scapeRouter = (item: string) => {
+    let scapeRoutes = ['mailer', '.DS_Store', 'index.js']
+    let scapeFiles = ['index.ts', 'index.js']
+    return (scapeRoutes.indexOf(item) === -1) && (scapeFiles.indexOf(item) === -1)
+}
