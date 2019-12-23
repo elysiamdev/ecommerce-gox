@@ -2,43 +2,55 @@ import { TResponse } from '@logic/types';
 import { validateInsert } from './providers/validator'
 import { insertOne, getByEmail } from './model';
 
+import clientDb from '@logic/clientDb'
+
+const usersModel = new clientDb('users')
+
+
 export const getOne = async (id: string) => {
-    let response: TResponse = {}
-    return response;
+    let response: any = await usersModel.getOne(id)
+    return {
+        success: response.length > 0,
+        data: response.length ? response[0] : null,
+        message: response.length ? [`${response.length} users found`] : ['Ops! we couldn ot found the user']
+    };
 }
 export const getAll = async () => {
-    let response: TResponse = {}
-    return response;
+    let response: any = await usersModel.getAll()
+    return {
+        success: response.length > 0,
+        data: response,
+        message: [`${response.length} users found`]
+    };
 }
 export const deleteOne = async (id: string) => {
-    let response: TResponse = {}
-    return response;
+    let response: any = await usersModel.delete(id)
+    return {
+        success: response.length > 0,
+        message: [`${response.length} users deleted`]
+    }
 }
-export const insertUser = async <TUser>(user: TUser) => {
+export const insertUser = async (user: any) => {
     user = { ...user, role: 1 }
-    let response: TResponse = {};
-    let isValid = validateInsert(user)
-
-    if (!isValid) {
-        let didInsert = await insertOne(user)
-        if (didInsert) {
-            response.success = true;
-            response.message = ['User inserted!']
+    let data = validateInsert(user)
+    if (data.success) {
+        let response: any = await usersModel.insert(user);
+        return {
+            success: response.length > 0,
+            message: ['']
         }
-        else {
-            response.success = false;
-            response.message = ['We have problem, please try it later or contact us']
-        }
-        return response;
     }
     else {
-        response.success = false;
-        response.message = isValid
-        return response;
+        return data;
     }
-
 }
-
+export const updateService = async (user: any) => {
+    let response: any = await usersModel.update(user)
+    return {
+        success: response.length > 0,
+        data: response
+    }
+}
 export const userByEmail = async (email: string) => {
     let user: Array<any> = await getByEmail(email);
     let response: TResponse = {
