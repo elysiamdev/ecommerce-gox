@@ -1,6 +1,6 @@
 import clientDb from '@logic/clientDb'
 import { validateInsert, validateUpdate } from './helpers/validate'
-import { Product } from './providers/types';
+import { Product, Products } from './providers/types';
 
 const productsModel = new clientDb<Product>('products')
 
@@ -16,6 +16,7 @@ export const insert = async (product: any) => {
         return data;
     }
 }
+
 export const getProduct = async (id: any) => {
     let response = await productsModel.getOne(id)
     return response;
@@ -52,11 +53,18 @@ export const getAll = async (data: any) => {
         data: response
     }
 }
-
+export const getBySlug = async (slugUrl: any) => {
+    let response: any = await productsModel.getByField('slug_url', slugUrl)
+    return {
+        success: response.length,
+        data: response
+    }
+}
 export default {
     insert,
     getProduct,
     updateProduct,
     deleteProduct,
-    getAll
+    getAll,
+    getBySlug
 }

@@ -10,6 +10,6 @@ const tempHanbdler = () => { }
 router.get('', getProductsRequest)
 router.get('/:id', getProductRequest)
 router.put('/', updateProductRequest)
-router.post('/:slug-url', tempHanbdler)
+router.post('/:slugUrl', tempHanbdler)
 
 export default router;
