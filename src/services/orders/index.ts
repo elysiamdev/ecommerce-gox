@@ -1,13 +1,13 @@
 import clientDb from '@logic/clientDb'
 import { validateInsert, validateUpdate } from './helpers/validate'
-import { Product, Products } from './providers/types';
+import { Order, Orders } from './providers/types';
 
-const productsModel = new clientDb<Product>('products')
+const ordersModel = new clientDb<Order>('orders')
 
 export const insertService = async (product: any) => {
     let data = validateInsert(product);
     if (data.success) {
-        let response = await productsModel.insert(product)
+        let response = await ordersModel.insert(product)
         return {
             success: true,
             data: response
@@ -18,13 +18,13 @@ export const insertService = async (product: any) => {
 }
 
 export const getService = async (id: any) => {
-    let response = await productsModel.getOne(id)
+    let response = await ordersModel.getOne(id)
     return response;
 }
 export const updateService = async (product: any) => {
     let data = validateUpdate(product);
     if (data.success) {
-        let response: any = await productsModel.update(product)
+        let response: any = await ordersModel.update(product)
         return {
             success: response.length > 0,
             data: response
@@ -36,7 +36,7 @@ export const updateService = async (product: any) => {
 }
 export const deleteService = async (id: string) => {
     if (id) {
-        let response = await productsModel.delete(id)
+        let response = await ordersModel.delete(id)
         return response;
     }
     else {
@@ -47,24 +47,17 @@ export const deleteService = async (id: string) => {
     }
 }
 export const getAllService = async (data: any) => {
-    let response: any = await productsModel.getAll()
+    let response: any = await ordersModel.getAll()
     return {
         success: response.length > 0,
         data: response
     }
 }
-export const getBySlugService = async (slugUrl: any) => {
-    let response: any = await productsModel.getByField('slug_url', slugUrl)
-    return {
-        success: response.length,
-        data: response
-    }
-}
+
 export default {
     insertService,
     getService,
     updateService,
     deleteService,
-    getAllService,
-    getBySlugService
+    getAllService
 }
