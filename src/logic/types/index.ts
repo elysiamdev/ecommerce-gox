@@ -6,3 +6,15 @@ export type TResponse = {
 }
 
 export type TTableObject = any;
+
+export type TJwtToken = {
+    isProtected: boolean,
+    data: any,
+}
+
+
+export type TEmailOptions = {
+    link: string,
+    imageUrl: string,
+    title: string
+}

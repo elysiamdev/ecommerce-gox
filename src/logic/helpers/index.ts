@@ -7,3 +7,4 @@ export const cleanValidate = (data: any) => {
     })
     return response
 }
+

@@ -7,8 +7,8 @@ const setEngineView = (app: Application) => {
 
     var hbs = exphbs.create({
         helpers: {
-            testing: function () {
-                return 'testing aqui'
+            testing: function (paramenter: string) {
+                return paramenter;
             }
         },
         extname: '.hbs'
