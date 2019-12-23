@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { rootPath } from '../config'
 import fs from 'fs'
-import { IMiddelware } from "@logic/interfaces";
+import { IMiddelware } from "../logic/interfaces";
 
 let scapeRoutes = ['mailer', '.DS_Store']
 

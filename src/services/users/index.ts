@@ -1,8 +1,7 @@
-import { TResponse } from '@logic/types';
+import { TResponse } from '../../logic/types';
 import { validateInsert } from './providers/validator'
-import { insertOne, getByEmail } from './model';
 
-import clientDb from '@logic/clientDb'
+import clientDb from '../../logic/clientDb'
 
 const usersModel = new clientDb('users')
 
@@ -52,7 +51,7 @@ export const updateService = async (user: any) => {
     }
 }
 export const userByEmail = async (email: string) => {
-    let user: Array<any> = await getByEmail(email);
+    let user: any = await usersModel.getByField('email', email);
     let response: TResponse = {
         success: (user.length > 0),
         data: user.length ? user[0] : null,

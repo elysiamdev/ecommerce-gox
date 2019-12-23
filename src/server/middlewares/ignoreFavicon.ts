@@ -1,4 +1,5 @@
-import { IMiddelware } from '@logic/interfaces'
+// import { IMiddelware } from '@logic/interfaces'
+import { IMiddelware } from '../../logic/interfaces'
 import { Application } from 'express';
 
 export const ignoreFavicon: IMiddelware = (req, res, next) => {

@@ -1,4 +1,4 @@
-import { IHttpExpress } from "@logic/interfaces";
+import { IHttpExpress } from "../../../logic/interfaces";
 import {
     insertService,
     getService,

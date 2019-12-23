@@ -1,4 +1,4 @@
-import { IHttpExpress } from "@logic/interfaces";
+import { IHttpExpress } from "../../../logic/interfaces";
 import { signIn, signUp, recoveryPassword } from "../index";
 
 export const signInRequest: IHttpExpress = async (req, res, next) => {

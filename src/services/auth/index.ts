@@ -1,8 +1,8 @@
 import jwt, { sign } from "jsonwebtoken";
 import { apiSecret } from "../../config";
-import { TResponse } from "@logic/types";
-import { userByEmail, insertUser } from "@services/users";
-import Mailer from '@services/mailer'
+import { TResponse } from "../../logic/types";
+import { userByEmail, insertService } from "../users";
+import Mailer from '../mailer'
 
 export const verifyToken = (token: string) => new Promise((resolve: Function) => (
 
@@ -57,7 +57,7 @@ export const signIn = async (credentials: any) => {
 
 }
 
-export const signUp = async (userData: any) => await insertUser(userData)
+export const signUp = async (userData: any) => await insertService(userData)
 
 export const recoveryPassword = async (email: string) => {
     let user: any = await userByEmail(email);

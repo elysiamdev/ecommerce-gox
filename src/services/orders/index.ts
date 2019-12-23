@@ -1,4 +1,4 @@
-import clientDb from '@logic/clientDb'
+import clientDb from '../../logic/clientDb'
 import { validateInsert, validateUpdate } from './helpers/validate'
 import { Order, Orders } from './providers/types';
 

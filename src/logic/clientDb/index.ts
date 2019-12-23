@@ -1,4 +1,5 @@
-import knex from "@database/index";
+// import knex from "@database/index";
+import knex from '../../server/db/index'
 
 class ClientKnex<T> {
     private service: Function;
@@ -20,7 +21,7 @@ class ClientKnex<T> {
         this.service().select('*')
             .then((response: Array<T>) => resolve(response))
     })
-    update = (data: T) => new Promise(resolve => {
+    update = (data: any) => new Promise(resolve => {
         let dataToUpdate: any = { ...data, id: null }
         delete dataToUpdate.id
         this.service().where('id', data.id).update(data)

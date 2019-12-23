@@ -1,4 +1,4 @@
-import { IHttpExpress } from "@logic/interfaces"
+import { IHttpExpress } from "../../../logic/interfaces"
 
 export const homeHandler: IHttpExpress = (req: any, res: any, next: any) => {
     res.render('site/home')

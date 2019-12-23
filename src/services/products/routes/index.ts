@@ -10,7 +10,6 @@ import {
 
 let router = Router()
 
-
 router.get('', getProductsRequest)
 router.get('/:id', getProductRequest)
 router.put('/', updateProductRequest)
