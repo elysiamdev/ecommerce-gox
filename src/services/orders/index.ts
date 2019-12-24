@@ -1,4 +1,4 @@
-import clientDb from '../../logic/clientDb'
+import { database as clientDb } from 'gox-packages'
 import { validateInsert, validateUpdate } from './helpers/validate'
 import { Order, Orders } from './providers/types';
 

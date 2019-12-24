@@ -2,7 +2,8 @@ import { Application } from "express";
 import { rootPath } from '../config'
 import fs from 'fs'
 import { IMiddelware } from "../logic/interfaces";
-import { scapeRouter } from '../logic/helpers'
+import { scapeRouter } from 'gox-packages'
+
 const servicesList = fs.readdirSync(`${rootPath}/services/`);
 const middlewarePattern: IMiddelware = (req, res, next) => next()
 

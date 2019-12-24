@@ -1,4 +1,4 @@
-import { IHttpExpress } from "../../../logic/interfaces";
+import { IHttpRequest } from "gox-packages";
 import {
     insertService,
     getService,
@@ -8,27 +8,27 @@ import {
     getBySlugService
 } from '../index'
 
-export const getProductRequest: IHttpExpress = async (req, res, next) => {
+export const getProductRequest: IHttpRequest = async (req, res, next) => {
     let response = await getService(req.params.id)
     res.json(response).status(200);
 }
-export const updateProductRequest: IHttpExpress = async (req, res, next) => {
+export const updateProductRequest: IHttpRequest = async (req, res, next) => {
     let response: any = await updateService(req.body)
     res.json(response).status(200)
 }
-export const getProductsRequest: IHttpExpress = async (req, res, next) => {
+export const getProductsRequest: IHttpRequest = async (req, res, next) => {
     let response = await getAllService(req.body)
     res.json(response);
 }
-export const deleteProductRequest: IHttpExpress = async (req, res, next) => {
+export const deleteProductRequest: IHttpRequest = async (req, res, next) => {
     let response = await deleteService(req.body)
     res.json(response).status(200)
 }
-export const insertProductRequest: IHttpExpress = async (req, res, next) => {
+export const insertProductRequest: IHttpRequest = async (req, res, next) => {
     let response = await insertService(req.body)
     res.json(response).status(200)
 }
-export const getBySlugRequest: IHttpExpress = async (req, res, next) => {
+export const getBySlugRequest: IHttpRequest = async (req, res, next) => {
     let response = await getBySlugService(req.params.slug)
     res.json(response).status(200)
 }

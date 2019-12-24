@@ -1,6 +1,7 @@
-import clientDb from "../../logic/clientDb"
+import { database as clientDb } from 'gox-packages'
 import { validateInsert, validateUpdate } from './helpers/validate'
 import { Product, Products } from './providers/types';
+
 
 const productsModel = new clientDb<Product>('products')
 
