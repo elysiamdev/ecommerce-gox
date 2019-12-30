@@ -17,7 +17,12 @@ export const homeHandler = (req: any, res: any, next: any) => {
                 { title: 'Produto 11', url: '/site/produto/produto-11', image: undefined, price: 16.01 },
                 { title: 'Produto 12', url: '/site/produto/produto-12', image: undefined, price: 16.01 },
             ]}
-    ]})
+        ],
+        "cart": {
+            "products": [
+                { title: 'Produto 1', url: '/site/produto/produto-1', image: undefined, price: 12.01, quantity: 1 },
+        ]}
+    })
 
     res.render('site/home', { sharedData: sharedData })
 }
