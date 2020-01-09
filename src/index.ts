@@ -1,4 +1,9 @@
 import 'module-alias/register'
-import server from './server'
+import buildServer from './server'
 
-server()
+const server = buildServer()
+const port: any = process.env.PORT || 4003
+
+server.listen(port, () => {
+    console.log(`listen on port ${port}`)
+})

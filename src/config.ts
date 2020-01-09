@@ -5,12 +5,12 @@ export const apiSecret = '<askld123--0ewe>'
 export const defaultUrl = 'http://localhost:4003'
 export const dbConfig = {
     local_database: {
-        client: 'mysql',
+        client: 'postgresql',
         connection: {
             host: settings.DB_HOST ? settings.DB_HOST : 'localhost',
-            user: settings.DB_USER ? settings.DB_USER : 'root',
-            password: settings.DB_PASSWORD ? settings.DB_PASSWORD : "root",
-            database: settings.DATABASE ? settings.DATABASE : 'totenImages'
+            user: settings.DB_USER ? settings.DB_USER : 'eco',
+            password: settings.DB_PASSWORD ? settings.DB_PASSWORD : "",
+            database: settings.DATABASE ? settings.DATABASE : 'eco_dev'
         },
     },
     prod_database: {

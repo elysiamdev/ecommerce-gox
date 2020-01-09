@@ -1,35 +1,11 @@
-import knex from '@database/index'
-import { TUsers } from '../providers/types'
-import { IModelData } from '@logic/interfaces'
-
-export const Users: any = () => knex('users');
-
-export const getAll: IModelData = () => new Promise<TUsers>(resolve => {
-    Users().select('*')
-        .then((response: any) => {
-            resolve(response)
-        })
-        .catch((err: any) => {
-            resolve([])
-        })
-})
-
-export const insertOne: IModelData = (data) => new Promise(resolve => {
-    Users().insert(data)
-        .then((response: any) => resolve(response))
-        .catch((err: any) => {
-            console.warn(err)
-            resolve([])
-        })
-})
-
-export const deleteOne: IModelData = (id: string) => new Promise(resolve => {
-    Users().where('id', id).delete()
-        .then((response: any) => {
-            resolve(response)
-        })
-        .catch((err: any) => {
-            console.warn(err)
-            resolve([])
-        })
-})
+import { CreateUserAddressRequestModel } from './CreateUserAddressRequestModel'
+import { CreateUserAddressModel } from './CreateUserAddressModel'
+import { CreateUserLocalCredentialsModel } from './CreateUserLocalCredentialsModel'
+import { CreateUserProfileModel } from './CreateUserProfileModel'
+import { RegisterRequestModel } from './RegisterRequestModel'
+export { 
+    CreateUserAddressModel, 
+    CreateUserAddressRequestModel, 
+    CreateUserLocalCredentialsModel,
+    CreateUserProfileModel, 
+    RegisterRequestModel }

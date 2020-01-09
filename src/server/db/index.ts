@@ -8,6 +8,6 @@ if (process.env.NODE_ENV === 'production') {
 else {
     options = dbConfig.local_database
 }
-let knex = require('knex')(options);
+let knex = require('knex')({ ...options, debug: false });
 
 export default knex;
