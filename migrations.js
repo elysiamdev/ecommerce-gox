@@ -1,5 +1,9 @@
 import knex from './src/server/db'
+import fs from 'fs'
 require('dotenv').config()
+
+
+
 
 const config = {
     directory: [
@@ -8,7 +12,18 @@ const config = {
     ]
 }
 
-knex.migrate.latest(config)
-    .finally(() => {
-        knex.destroy()
-    })
+// knex.migrate.latest(config)
+//     .finally(() => {
+//         knex.destroy()
+//     })
+
+const getDirectories = () => new Promise(resolve => {
+    let path = `${__dirname}/src/services`
+
+    fs.readdir(path, (err, listdir) => err ? resolve(err) : resolve(listdir))
+
+})
+
+
+
+getDirectories()
