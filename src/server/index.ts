@@ -1,5 +1,4 @@
 import express from 'express'
-import http from 'http'
 import middlewares from './middlewares'
 import services from '../services'
 
@@ -9,13 +8,8 @@ const serverEngine = () => {
 
     middlewares(app)
     services(app)
-
-    const port: any = process.env.PORT || 4003
-    const server = http.createServer(app)
-
-    server.listen(port, () => {
-        console.log(`listen on port ${port}`)
-    })
+    
+    return app
 }
 
 export default serverEngine;
