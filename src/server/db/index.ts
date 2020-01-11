@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 else {
     options = dbConfig.local_database
 }
-console.log(options)
+
 let knex = require('knex')({ ...options, debug: false });
 
 export default knex;

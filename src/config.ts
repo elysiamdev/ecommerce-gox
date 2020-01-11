@@ -1,9 +1,8 @@
-const settings: any = process;
+const settings: any = process.env;
 export const rootPath = __dirname;
 export const applicationName = '';
 export const apiSecret = '<askld123--0ewe>'
 export const defaultUrl = 'http://localhost:4003'
-
 
 export const dbConfig = {
     local_database: {
