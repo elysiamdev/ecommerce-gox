@@ -16,7 +16,7 @@ export const updateOrderRequest: IHttpExpress = async (req, res, next) => {
     res.json(response).status(200)
 }
 export const getOrdersRequest: IHttpExpress = async (req, res, next) => {
-    let response = await getAllService(req.body)
+    let response = await getAllService()
     res.json(response);
 }
 export const deleteOrderRequest: IHttpExpress = async (req, res, next) => {

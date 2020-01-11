@@ -1,13 +1,13 @@
 import { database as clientDb } from 'gox-packages'
 import { validateInsert, validateUpdate } from './helpers/validate'
-import { Order, Orders } from './providers/types';
+import { Order } from './providers/types';
 
 const ordersModel = new clientDb<Order>('orders')
 
-export const insertService = async (product: any) => {
-    let data = validateInsert(product);
+export const insertService = async (order: any) => {
+    let data = validateInsert(order);
     if (data.success) {
-        let response = await ordersModel.insert(product)
+        let response = await ordersModel.insert(order)
         return {
             success: true,
             data: response
@@ -21,10 +21,10 @@ export const getService = async (id: any) => {
     let response = await ordersModel.getOne(id)
     return response;
 }
-export const updateService = async (product: any) => {
-    let data = validateUpdate(product);
+export const updateService = async (order: any) => {
+    let data = validateUpdate(order);
     if (data.success) {
-        let response: any = await ordersModel.update(product)
+        let response: any = await ordersModel.update(order)
         return {
             success: response.length > 0,
             data: response
@@ -32,8 +32,8 @@ export const updateService = async (product: any) => {
     } else {
         return data;
     }
-
 }
+
 export const deleteService = async (id: string) => {
     if (id) {
         let response = await ordersModel.delete(id)
@@ -46,7 +46,7 @@ export const deleteService = async (id: string) => {
         }
     }
 }
-export const getAllService = async (data: any) => {
+export const getAllService = async () => {
     let response: any = await ordersModel.getAll()
     return {
         success: response.length > 0,
