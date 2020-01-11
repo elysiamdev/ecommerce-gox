@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const settings: any = process.env;
 export const rootPath = __dirname;
 export const applicationName = '';

@@ -1,5 +1,4 @@
 import { dbConfig } from '../../config'
-
 let options = {}
 
 if (process.env.NODE_ENV === 'production') {
