@@ -1,15 +1,15 @@
 import express from 'express'
-import { 
-    homeHandler, 
-    productHandler, 
-    contactHandler, 
-    searchHandler, 
-    loginHandler, 
+import {
+    homeHandler,
+    productHandler,
+    contactHandler,
+    searchHandler,
+    loginHandler,
     registerHandler,
     orderHistoryHandler,
     customerInfoHandler,
     orderInfoHandler
- } from '../request_handlers'
+} from '../request_handlers'
 
 const router = express.Router()
 
@@ -24,5 +24,7 @@ router.get('/registrar', registerHandler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
 router.get('/customer-info', customerInfoHandler)
+
+
 
 export default router
