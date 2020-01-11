@@ -3,3 +3,4 @@ build
 .tools-versions
 yarn.lock
 *.DS_store
+.env
