@@ -7,14 +7,11 @@ const getDirectories = () => new Promise(resolve => {
     fs.readdir(path, (err, listdir) => err ? resolve(err) : resolve(listdir))
 })
 
-
-
 function main() {
     getDirectories().then(response => {
         if (response) {
             let listdirs = response.filter(item => item !== 'index.ts')
             listdirs = listdirs.map(item => `./src/services/${item}/migrations`)
-
             const config = {
                 directory: [
                     './src/services/users/migrations',
