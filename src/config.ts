@@ -1,8 +1,10 @@
-const settings: any = process.env;
+const settings: any = process;
 export const rootPath = __dirname;
 export const applicationName = '';
 export const apiSecret = '<askld123--0ewe>'
 export const defaultUrl = 'http://localhost:4003'
+
+
 export const dbConfig = {
     local_database: {
         client: 'postgresql',

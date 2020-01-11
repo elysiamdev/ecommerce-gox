@@ -2,15 +2,30 @@ import validate from 'validate.js'
 
 const product = {
     name: {
-        presence: true,
-    },
-    suplier: {
         presence: true
     },
-    dimensions: {
+    supplier: {
         presence: true
     },
-    weight: {
+    especifications: {
+        presence: true
+    },
+    details: {
+        presence: true
+    },
+    description: {
+        presence: true
+    },
+    quantity: {
+        presence: true
+    },
+    related_ids: {
+        presence: true
+    },
+    categories_ids: {
+        presence: true
+    },
+    images: {
         presence: true
     },
     price_buy: {
@@ -18,18 +33,9 @@ const product = {
     },
     price_sell: {
         presence: true
-    },
-    quantity: {
-        presence: true
-    },
-    images: {
-        presence: true
-    },
-    categories: {},
-    description: {},
-    details: {},
-    related: {}
+    }
 }
+
 
 const updateOptions = {
     id: {

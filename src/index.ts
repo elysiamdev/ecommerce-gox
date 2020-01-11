@@ -1,3 +1,4 @@
+require('dotenv').config()
 import 'module-alias/register'
 import buildServer from './server'
 
