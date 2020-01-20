@@ -1,7 +1,7 @@
 import { UserProfileRepository } from '@services/users/db/UserProfileRepository'
 import { seedTables, clearDb } from '../../../helpers'
 import { makeCreateUserProfile } from '@services/users/services/createUserProfile'
-import { CreateUserProfileModel, RegisterRequestModel } from '@services/users/model'
+import { CreateUserProfileModel } from '@services/users/model'
 
 describe('Users :: services :: createUserProfile', () => {
     const repositoryMock = { 
@@ -20,7 +20,7 @@ describe('Users :: services :: createUserProfile', () => {
             email: 'bruno@email.com', 
             password: 'securep@ssword123', 
             confirm: 'securep@ssword123', 
-            telephone: '+555134567890' } as RegisterRequestModel
+            telephone: '+555134567890' }
 
         const result = await createUserProfile(profile)
 

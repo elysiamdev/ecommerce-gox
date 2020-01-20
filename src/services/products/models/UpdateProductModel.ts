@@ -1,0 +1,6 @@
+interface UpdateProductModel {
+
+
+}
+
+export { UpdateProductModel }

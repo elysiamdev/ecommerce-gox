@@ -1,10 +1,6 @@
-import { Router, Request, Response } from 'express'
-import services from './services'
+const Auth = {
+    entryPoint: false,
+    router: false
+}
 
-const router = Router()
-
-router.get('/', (req: Request, res: Response) => res.json({ data: '' }))
-
-export { services };
-
-export default router;
+export default Auth 

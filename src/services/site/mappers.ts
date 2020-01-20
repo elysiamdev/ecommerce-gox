@@ -1,9 +1,16 @@
-import { RegisterRequestModel } from "@services/users/model"
+import { RegisterRequestModel } from "@services/site/models"
+import { CreateUserAddressRequestModel } from "@services/users/model"
 
-const mapRegisterRequestBodyIntoRegisterRequestModel = (registerRequestBody: any): RegisterRequestModel => {
-    const { fullname,email, telephone, password, confirm, newsletter } = registerRequestBody
+const mapRequestBodyIntoRegisterRequestModel = (requestBody: any): RegisterRequestModel => {
+    const { fullname,email, telephone, password, confirm, newsletter, agreed } = requestBody
 
-    return { fullname, email, telephone, password, confirm, newsletter }
+    return { fullname, email, telephone, password, confirm, newsletter, agreed }
 }
 
-export { mapRegisterRequestBodyIntoRegisterRequestModel }
+const mapRequestBodyIntoCreateUserAddressRequestModel = (requestBody: any): CreateUserAddressRequestModel => {
+    const { name, street, number, complement, city, state, postal_code, country, address_type_id } = requestBody
+
+    return { name, street, number, complement, city, state, postal_code, country, address_type_id }
+}
+
+export { mapRequestBodyIntoRegisterRequestModel, mapRequestBodyIntoCreateUserAddressRequestModel }

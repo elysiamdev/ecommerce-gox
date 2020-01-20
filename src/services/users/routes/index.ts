@@ -1,5 +1,6 @@
 import { Router } from 'express'
+import { registerHandler } from '../request_handlers'
+
 const router = Router()
-import Actions from '../index'
 
 export default router;

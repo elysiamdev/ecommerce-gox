@@ -11,16 +11,16 @@ const requireServices: Array<any> = servicesList.filter((item: string) => (item 
 
 let servicesObject: any = {}
 
-requireServices.map((item: string) => {
-    servicesObject[item] = require(`./${item}/routes`)
+requireServices.map((service: string) => {
+    servicesObject[service] = require(`./${service}`)
 })
 
-const listServices = Object.keys(servicesObject);
-
 export default (app: Application) => {
-    listServices.map((item: string) => {
-        if (typeof servicesObject[item].default == 'function') {
-            app.use(`/${item}`, servicesObject[item].default, middlewarePattern)
+    Object.keys(servicesObject).map((service: string) => {
+        const { entryPoint, router } = servicesObject[service].default
+
+        if(router) {
+            app.use(entryPoint, router)
         }
     })
 }
