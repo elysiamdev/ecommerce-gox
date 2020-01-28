@@ -1,7 +1,7 @@
 import { TResponse } from '../../logic/types';
 import { validateInsert } from './providers/validator'
 
-import clientDb from '../../logic/clientDb'
+import { database as clientDb } from 'gox-packages'
 
 const usersModel = new clientDb('users')
 
