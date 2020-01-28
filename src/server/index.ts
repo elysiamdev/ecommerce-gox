@@ -1,21 +1,19 @@
 import express from 'express'
-import http from 'http'
 import middlewares from './middlewares'
 import services from '../services'
+import { errorHandler } from '@logic/errors/error_handler'
 
 const serverEngine = () => {
 
     const app = express()
 
     middlewares(app)
+    
     services(app)
+    
+    app.use(errorHandler)
 
-    const port: any = process.env.PORT || 4003
-    const server = http.createServer(app)
-
-    server.listen(port, () => {
-        console.log(`listen on port ${port}`)
-    })
+    return app
 }
 
 export default serverEngine;

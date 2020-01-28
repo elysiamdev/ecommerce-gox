@@ -1,56 +1,76 @@
 import validate from 'validate.js'
 
-const updateOptions = {
-    id: {
-        presence: true
-    },
-    first_name: {
-        presence: true
-    },
-    last_name: {
-        presence: true
-    },
-    password: {
-        presence: true,
-        length: {
-            minimum: 6,
-            message: "Password must be at least 6 characters"
-        }
-    },
-    email: {
-        presence: true,
-        email: true
-    },
-    role: {
-        presence: true
+export const validateProfile = (profile: { fullname: string }): { isValid: boolean, errors: {}} => {
+    const options = {
+        fullname: {
+            presence: { allowEmpty: false },
+        },
     }
+
+    const validationResult = validate(profile, options)
+
+    if(validationResult) {
+        return { isValid: false, errors: validationResult }
+    }
+    return { isValid: true, errors: {}}
 }
 
-const insertOptions = {
-
-    first_name: {
-        presence: true
-    },
-    last_name: {
-        presence: true
-    },
-    password: {
-        presence: true,
-        length: {
-            minimum: 6,
-            message: "Password must be at least 6 characters"
+export const validateLocalCredentials = (credentials: { email: string, password: string, confirm: string}): { isValid: boolean, errors: {}} => {
+    const options = {
+        email: {
+            presence: { allowEmpty: false },
+            email: true
+        },
+        password: {
+            presence: { allowEmpty: false },
+            length: {
+                minimum: 6
+            }
+        },
+        confirm: {
+            presence: { allowEmpty: false },
+            equality: "password"
         }
-    },
-    email: {
-        presence: true,
-        email: true
-    },
-    role: {
-        presence: true
     }
+
+    const validationResult = validate(credentials, options)
+
+    if(validationResult) {
+        return { isValid: false, errors: validationResult }
+    }
+    return { isValid: true, errors: {}}
 }
 
-export const validateInsert = (user: any) => validate(user, insertOptions) ? validate(user, insertOptions) : false;
+export const validateUserAddress = 
+    (address: { name: string, street: string, number: string, complement: string, postal_code: string, city: string, state: string, country: string }) => {
+        const options = {
+            name: {
+                presence: { allowEmpty: false },
+            },
+            street: {
+                presence: { allowEmpty: false },
+            },
+            number: {
+                presence: { allowEmpty: false },
+            },
+            postal_code: {
+                presence: { allowEmpty: false },
+            },
+            city: {
+                presence: { allowEmpty: false },
+            },
+            state: {
+                presence: { allowEmpty: false },
+            },
+            country: {
+                presence: { allowEmpty: false },
+            }
+        }
 
-export const validateUpdate = (user: any) => validate(user, updateOptions) ? validate(user, updateOptions) : false;
+        const validationResult = validate(address, options)
 
+        if(validationResult) {
+            return { isValid: false, errors: validationResult }
+        }
+        return { isValid: true, errors: {} }
+    }

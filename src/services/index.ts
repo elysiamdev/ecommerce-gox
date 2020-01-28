@@ -7,22 +7,20 @@ const middlewarePattern: IMiddelware = (req, res, next) => next()
 
 const servicesList = fs.readdirSync(`${rootPath}/services/`);
 
-const requireServices: Array<any> = servicesList.filter((item: string) => {
-    return item != 'index.ts'
-})
+const requireServices: Array<any> = servicesList.filter((item: string) => (item !== 'index.ts' && item !== '.DS_Store'))
 
 let servicesObject: any = {}
 
-requireServices.map((item: string) => {
-    servicesObject[item] = require(`./${item}/routes`)
+requireServices.map((service: string) => {
+    servicesObject[service] = require(`./${service}`)
 })
 
-const listServices = Object.keys(servicesObject);
-
 export default (app: Application) => {
-    listServices.map((item: string) => {
-        if (typeof servicesObject[item].default == 'function') {
-            app.use(`/${item}`, servicesObject[item].default, middlewarePattern)
+    Object.keys(servicesObject).map((service: string) => {
+        const { entryPoint, router } = servicesObject[service].default
+
+        if(router) {
+            app.use(entryPoint, router)
         }
     })
 }
