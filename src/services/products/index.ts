@@ -1,4 +1,3 @@
-import router from './routes'
 
 const product = {
     entryPoint: false,
