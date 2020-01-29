@@ -11,7 +11,8 @@ import {
     register2Handler,
     orderHistoryHandler,
     customerInfoHandler,
-    orderInfoHandler
+    orderInfoHandler,
+    adminHandler
 } from '../request_handlers'
 
 const authHandler = (req: any, res: any, next: any) => {
@@ -32,6 +33,7 @@ router.post('/registrar', register2Handler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
 router.get('/customer-info', customerInfoHandler)
+router.get('/admin/', adminHandler)
 
 
 

@@ -5,9 +5,7 @@ import { Application } from 'express'
 const setEngineView = (app: Application) => {
     const hbs = exphbs.create({
         helpers: {
-            testing: function () {
-                return 'testing aqui'
-            }
+            isDev: () => process.env.NODE_ENV === 'dev'
         },
         extname: '.hbs'
     })

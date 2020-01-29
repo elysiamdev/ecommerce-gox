@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "migration": "nodemon --watch ./src --exec ts-node src/migrations/index.ts NODE_ENV=dev",
-        "start": "nodemon --watch ./src --exec ts-node src/index.ts NODE_ENV=dev",
+        "start": "NODE_ENV=dev nodemon --watch ./src --exec ts-node src/index.ts",
         "build": "tsc",
         "prod": "npm run build && node build/src/index.js",
         "react_link": "rm -rf src/public/site/react_assets/* && rm -rf src/public/admin/admin-ui/* && node react-ui/react_includer/index.js",

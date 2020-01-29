@@ -132,3 +132,5 @@ export const orderInfoHandler = (req: any, res: any, next: any) => {
 export const customerInfoHandler = (req: any, res: any, next: any) => {
     res.render('site/customer_info')
 }
+
+export const adminHandler = (req: any, res: any, next: any) => res.render('admin/home', { layout: 'admin', isDev: process.env.NODE_ENV === 'dev' })
