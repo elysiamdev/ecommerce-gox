@@ -82,3 +82,16 @@ export const orderHistoryHandler = (req: any, res: any, next: any) => {
 export const orderInfoHandler = async (req: any, res: any, next: any) => {
     res.render('site/order_info')
 }
+
+export const cartHandler = async (req: any, res: any, next: any) => {
+    const sharedData = { "cart": {
+        "products": [
+            { id: 1, title: 'Produto 1', url: '/produto/produto-1', image: '/static/img/demo/shop/product/9.jpg', price: 12.01, quantity: 1 },
+            { id: 2, title: 'Produto 2', url: '/produto/produto-2', image: '/static/img/demo/shop/product/10.jpg', price: 13.01, quantity: 2 },
+            { id: 3, title: 'Produto 3', url: '/produto/produto-3', image: '/static/img/demo/shop/product/11.jpg', price: 14.01, quantity: 1 },
+            { id: 4, title: 'Produto 4', url: '/produto/produto-4', image: '/static/img/demo/shop/product/14.jpg', price: 15.01, quantity: 2 },
+        ]}
+    }
+
+    res.render('site/view_cart', { sharedData: JSON.stringify(sharedData) })
+}

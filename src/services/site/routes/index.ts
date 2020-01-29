@@ -9,7 +9,7 @@ import {
     loginHandler, 
     registerHandler,
     orderHistoryHandler,
-    orderInfoHandler
+    cartHandler,
  } from '../request_handlers'
 
 const router = express.Router()
@@ -35,6 +35,7 @@ router.post('/login', (req: any, res: any, next) => {
     })(req, res, next)
 })
 
+router.get('/carrinho', cartHandler)
 router.get('/registrar', registerHandler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
