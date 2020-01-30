@@ -40,7 +40,6 @@ router.post('/login', (req: any, res: any, next) => {
 router.get('/registrar', registerHandler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
-router.get('/minha-conta', customerInfoHandler)
 router.get('/admin/', adminHandler)
 
 export default router
