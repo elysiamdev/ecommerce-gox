@@ -14,6 +14,7 @@ function main() {
             listdirs = listdirs.map(item => `./src/services/${item}/migrations`)
             const config = {
                 directory: [
+                    './src/services/admin/migrations',
                     './src/services/users/migrations',
                     './src/services/products/migrations',
                 ]
