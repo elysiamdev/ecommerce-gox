@@ -2,7 +2,7 @@ exports.up = function(knex) {
     return knex.schema
         .createTable('address_types', (table) => {
             table.increments('id')
-            table.string('name', 255).notNullable()
+            table.string('name', 32).notNullable()
         })
 };
   

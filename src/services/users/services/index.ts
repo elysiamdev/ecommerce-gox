@@ -1,3 +1,4 @@
-import { createUserProfile } from './createUserProfile'
+import { makeCreateUserProfile } from './createUserProfile'
+import { makeCreateUserLocalCredentials } from './createUserLocalCredentials'
 
-export { createUserProfile }
+export { makeCreateUserLocalCredentials, makeCreateUserProfile } 

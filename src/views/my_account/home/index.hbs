@@ -1,0 +1,27 @@
+<!-- Main Container  -->
+<div class="main-container container">
+    <ul class="header-main ">
+        <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li class="home"><a href="#">Account   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        <li>  My Account</li>
+    </ul>
+    
+    <div class="row">
+        <!--Middle Part Start-->
+        <div class="col-sm-9" id="content">
+            <h2 class="title">My Account</h2>
+            <p class="lead">Hello, <strong>{{profile.fullname}}</strong> - To update your account information.</p>
+            <a href="/minha-conta/perfil">Atualizar Perfil</a>
+
+            <a href="/minha-conta/enderecos">Gerenciar Endereços</a>
+        </div>
+
+        <!--Middle Part End-->
+        <!--Right Part Start -->
+        <aside class="col-sm-3 hidden-xs" id="column-right">
+            {{> account/menu }}
+        </aside>
+        <!--Right Part End -->
+    </div>
+</div>
+<!-- //Main Container -->

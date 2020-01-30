@@ -1,13 +1,8 @@
 import { IHttpExpress } from "../../../logic/interfaces"
-import { mapRegisterRequestBodyIntoRegisterRequestModel } from "../mappers"
-import { makeCreateUserProfile } from "@services/users/services/createUserProfile"
-import { UserProfileRepository } from "@services/users/db/repositories"
 import knex from "@database/index"
-import { UserLocalCredentialsRepository } from "@services/users/db/UserLocalCredentialsRepository"
-import { makeCreateUserLocalCredentials } from "@services/users/services/createUserLocalCredentials"
-import { hashPassword } from "@services/users/services/hashPassword"
-import { UnitOfWork } from "@logic/UnitOfWork"
-import { makeRegisterUser } from "@services/users/services/registerUser"
+import { ProductsRepository } from "@services/products/db/ProductsRepository"
+import { makeFindUserAddresses } from "@services/users/services/findUserAddresses"
+import { AddressRepository } from "@services/users/db/repositories"
 
 export const homeHandler = (req: any, res: any, next: any) => {
     const sharedData = JSON.stringify({
@@ -39,6 +34,11 @@ export const homeHandler = (req: any, res: any, next: any) => {
             ]
         },
         "slides_wide": {
+        "cart": {
+            "products": [
+                { id: 1, title: 'Produto 1', url: '/produto/produto-1', image: undefined, price: 12.01, quantity: 1 },
+        ]},
+        "slides_wide": { 
             title: "Slider wide", products: [
                 { id: 1, title: "Slider wide item 1", isNew: true, sale: false, image: undefined, url: "/url", oldPrice: 10.01, newPrice: 15.01, description: "A product 1" },
                 { id: 2, title: "Slider wide item 2", isNew: false, sale: -30, image: undefined, url: "/url-1", oldPrice: 11.01, newPrice: 16.01, description: "A product 2" },
@@ -70,7 +70,7 @@ export const productHandler = (req: any, res: any, next: any) => {
             ]
         },
         "product": {
-            id: 1, title: 'Produto 1', url: '/site/produto/produto-1', image: undefined, price: 12.01, quantity: 1
+            id: 1, title: 'Produto 1', url: '/produto/produto-1', image: undefined, price: 12.01, quantity: 1 
         },
         "related_products": {
             title: "Deals title", products: [
@@ -89,7 +89,14 @@ export const contactHandler: IHttpExpress = (req: any, res: any, next: any) => {
 }
 
 export const searchHandler = (req: any, res: any, next: any) => {
-    res.render('site/search')
+    const { term } = req.query
+    const repository = new ProductsRepository(knex)
+
+    repository.search(term)
+        .then(result => {
+            const products = result.map(p => ({ ...p, sale: false, newPrice: p.sell_value, title: p.name, isNew: false }))
+            res.render('site/search', { sharedData: JSON.stringify({ search_result: products }) })
+        })
 }
 
 export const loginHandler = (req: any, res: any, next: any) => {
@@ -125,7 +132,7 @@ export const orderHistoryHandler = (req: any, res: any, next: any) => {
     res.render('site/order_history')
 }
 
-export const orderInfoHandler = (req: any, res: any, next: any) => {
+export const orderInfoHandler = async (req: any, res: any, next: any) => {
     res.render('site/order_info')
 }
 
