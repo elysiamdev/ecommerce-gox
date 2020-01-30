@@ -1,4 +1,4 @@
-import { insertItem, retrieveItem } from '../index'
+import { insertItem, retrieveItem } from '../services'
 
 interface IHttpExpress {
     (req: any, res: any, next: any): any
