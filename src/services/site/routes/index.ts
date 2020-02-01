@@ -1,5 +1,5 @@
 import express from 'express'
-import passport from '../../../server/middlewares/setupPassport'
+import passport from '@services/auth/passport'
 
 import {
     homeHandler,
@@ -8,16 +8,11 @@ import {
     searchHandler,
     loginHandler,
     registerHandler,
-    register2Handler,
     orderHistoryHandler,
     customerInfoHandler,
-    orderInfoHandler,
-    adminHandler
-} from '../request_handlers'
-
-const authHandler = (req: any, res: any, next: any) => {
-    res.redirect('/site/home')
-}
+    adminHandler,
+    orderInfoHandler
+ } from '../request_handlers'
 
 const router = express.Router()
 
@@ -27,14 +22,24 @@ router.get('/contato', contactHandler)
 router.get('/busca', searchHandler)
 
 router.get('/login', loginHandler)
-router.post('/login', passport.authenticate('local'), authHandler)
+
+router.post('/login', (req: any, res: any, next) => { 
+    passport.authenticate('local', function (error, user, info) {
+        if(error) return next(error)
+
+        if(!user) return res.render('site/login', { error: info })
+
+        req.logIn(user, (e: any) => {
+            if(e) next(e)
+
+            return res.redirect('/minha-conta')
+        })
+    })(req, res, next)
+})
+
 router.get('/registrar', registerHandler)
-router.post('/registrar', register2Handler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
-router.get('/customer-info', customerInfoHandler)
 router.get('/admin/', adminHandler)
-
-
 
 export default router

@@ -1,1 +1,8 @@
-export default 'site does not have services yet'
+import router from './routes'
+
+const site = {
+    entryPoint: '/',
+    router: router
+}
+
+export default site

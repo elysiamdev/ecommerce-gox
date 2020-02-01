@@ -1,10 +1,7 @@
-import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
+import passport from '@services/auth/passport'
+import { Application } from 'express'
 
-const validateUserCredentials = (username: any, password: any, done: any) => {}
-
-const localStrategy = new LocalStrategy(validateUserCredentials)
-
-passport.use(localStrategy)
-
-export default passport
+export default (app: Application) => {
+    app.use(passport.initialize())
+    app.use(passport.session())
+}

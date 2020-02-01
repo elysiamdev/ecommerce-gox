@@ -2,5 +2,6 @@ node_modules
 build
 .tools-versions
 yarn.lock
-*.DS_store
 .env
+.DS_Store
+public/react-dist

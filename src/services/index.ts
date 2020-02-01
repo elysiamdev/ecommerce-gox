@@ -9,17 +9,17 @@ const middlewarePattern: IMiddelware = (req, res, next) => next()
 
 const requireServices: Array<any> = servicesList.filter((item: string) => scapeRouter(item))
 let servicesObject: any = {}
-requireServices.map((item: string) => {
-    let routePath = `./${item}/routes`
-    servicesObject[item] = require(routePath)
+
+requireServices.map((service: string) => {
+    servicesObject[service] = require(`./${service}`)
 })
 
-const listServices = Object.keys(servicesObject);
-
 export default (app: Application) => {
-    listServices.map((item: string) => {
-        if (typeof servicesObject[item].default == 'function') {
-            app.use(`/${item}`, servicesObject[item].default, middlewarePattern)
+    Object.keys(servicesObject).map((service: string) => {
+        const { entryPoint, router } = servicesObject[service].default
+
+        if(router) {
+            app.use(entryPoint, router)
         }
     })
 }
