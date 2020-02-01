@@ -9,7 +9,9 @@ import {
     loginHandler, 
     registerHandler,
     orderHistoryHandler,
+    orderInfoHandler,
     cartHandler,
+    checkoutHandler
  } from '../request_handlers'
 
 const router = express.Router()
@@ -39,5 +41,7 @@ router.get('/carrinho', cartHandler)
 router.get('/registrar', registerHandler)
 router.get('/pedidos', orderHistoryHandler)
 router.get('/pedidos/:slug', orderInfoHandler)
+
+router.get('/finalizar-pedido', checkoutHandler)
 
 export default router

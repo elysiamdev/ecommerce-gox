@@ -1,5 +1,7 @@
 import knex from "@database/index"
 import { ProductsRepository } from "@services/products/db/ProductsRepository"
+import { makeFindUserAddresses } from "@services/users/services/findUserAddresses"
+import { AddressRepository } from "@services/users/db/repositories"
 
 export const homeHandler = (req: any, res: any, next: any) => {
     const sharedData = JSON.stringify({
@@ -49,7 +51,9 @@ export const productHandler = (req: any, res: any, next: any) => {
         }
     })
 
-    res.render('site/product', { sharedData: sharedData })
+    const product = { id: 1, title: 'Produto 1', url: '/produto/produto-1', description: 'descriptionsss', image: 'undefined', price: 12.01, quantity: 1 }
+
+    res.render('site/product', { sharedData: sharedData, product })
 }
 
 export const contactHandler = (req: any, res: any, next: any) => {
@@ -94,4 +98,27 @@ export const cartHandler = async (req: any, res: any, next: any) => {
     }
 
     res.render('site/view_cart', { sharedData: JSON.stringify(sharedData) })
+}
+
+export const checkoutHandler = async (req: any, res: any, next: any) => {
+    const isLoggedIn = req.user? true : false
+    const findUserAddresses = makeFindUserAddresses(new AddressRepository(knex))
+    const sharedData = {
+        "cart": {
+            "products": [
+                { id: 1, title: 'Produto 1', url: '/produto/produto-1', image: '/static/img/demo/shop/product/9.jpg', price: 12.01, quantity: 1 },
+                { id: 2, title: 'Produto 2', url: '/produto/produto-2', image: '/static/img/demo/shop/product/10.jpg', price: 13.01, quantity: 2 },
+                { id: 3, title: 'Produto 3', url: '/produto/produto-3', image: '/static/img/demo/shop/product/11.jpg', price: 14.01, quantity: 1 },
+                { id: 4, title: 'Produto 4', url: '/produto/produto-4', image: '/static/img/demo/shop/product/14.jpg', price: 15.01, quantity: 2 },
+            ]},
+        "checkout_form": {
+            isLoggedIn,
+            user_addresses: isLoggedIn? await findUserAddresses(req.user.id) : [],
+            current_step: 1,
+            use_shipping_address: true
+        }
+        
+    }
+
+    res.render('site/checkout', { sharedData: JSON.stringify(sharedData) })
 }
