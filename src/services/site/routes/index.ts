@@ -19,7 +19,6 @@ const router = express.Router()
 router.use((req: any, res: any, next: any) => {
     if(req.user) {
         res.locals.isAuthenticated = true
-        res.locals.user = { name:'Nome do usuário' }
     }
     next()
 })
