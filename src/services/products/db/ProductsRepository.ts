@@ -4,11 +4,11 @@ class ProductsRepository {
     private client: any
 
     constructor(knex: any) {
-        this.client = knex('products')
+        this.client = knex
     }
 
     async findAll(): Promise<Array<{ id: number}>> {
-        return []
+        return this.client('products').select('id', 'name', 'slug', 'description', 'images', 'buy_value', 'sell_value')
     }
 
     async create(productModel: CreateProductModel): Promise<{ id: number }> {
@@ -22,7 +22,7 @@ class ProductsRepository {
     }
 
     async findByColumn(column: string, value: any): Promise<{id: number}> {
-        return {id: 1}        
+        return await this.client('products').where(column, value).first()        
     }
 
     async update(productModel: UpdateProductModel): Promise<{ id: number }> {
