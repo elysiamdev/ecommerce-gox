@@ -1,5 +1,4 @@
 import express from 'express'
-import passport from '@services/auth/passport'
 
 import { 
     homeHandler, 
@@ -13,6 +12,7 @@ import {
     cartHandler,
     checkoutHandler
  } from '../request_handlers'
+import { localCredentialsAuthenticationHandler } from '@services/auth/request_handlers'
 
 const router = express.Router()
 
@@ -23,19 +23,7 @@ router.get('/busca', searchHandler)
 
 router.get('/login', loginHandler)
 
-router.post('/login', (req: any, res: any, next) => { 
-    passport.authenticate('local', function (error, user, info) {
-        if(error) return next(error)
-
-        if(!user) return res.render('site/login', { error: info })
-
-        req.logIn(user, (e: any) => {
-            if(e) next(e)
-
-            return res.redirect('/minha-conta')
-        })
-    })(req, res, next)
-})
+router.post('/login', localCredentialsAuthenticationHandler)
 
 router.get('/carrinho', cartHandler)
 router.get('/registrar', registerHandler)
