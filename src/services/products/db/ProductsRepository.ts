@@ -34,7 +34,7 @@ class ProductsRepository {
     }
 
     async search(term: string): Promise<Array<{ id: number, name: string, description: string, sell_value: string }>> {
-        const found = await this.client.select('id', 'name', 'description', 'sell_value').where(function (q: any) {
+        const found = await this.client('products').select('id', 'name', 'description', 'sell_value').where(function (q: any) {
             q.whereRaw("plainto_tsquery('unaccent_portuguese', unaccent(?)) @@ products.searchable_column_fts", [term])
         })
 
