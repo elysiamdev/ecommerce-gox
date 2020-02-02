@@ -1,14 +1,25 @@
 import express from 'express'
 
 import { 
-    customerInfoHandler, listAddressesHandler, newAddressesHandler,
+    customerInfoHandler, 
+    listAddressesHandler, 
+    newAddressesHandler,
  } from '../request_handlers'
 import { protectHandler } from '@services/auth/middlewares/protectHandler'
+import { logoutHandler } from '@services/auth/request_handlers'
 
 const router = express.Router()
 
+router.use((req: any, res: any, next: any) => {
+    if(req.user) {
+        res.locals.isAuthenticated = true
+        res.locals.user = { name:'Nome do usuário' }
+    }
+    next()
+})
 router.get('/', protectHandler, customerInfoHandler)
 router.get('/enderecos', protectHandler, listAddressesHandler)
 router.get('/enderecos/novo', protectHandler, newAddressesHandler)
+router.get('/logout', logoutHandler)
 
 export default router

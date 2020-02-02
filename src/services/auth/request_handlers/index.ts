@@ -14,4 +14,9 @@ const localCredentialsAuthenticationHandler = (req: any, res: any, next: any) =>
     })(req, res, next)
 }
 
-export { localCredentialsAuthenticationHandler }
+const logoutHandler = (req: any, res: any, next: any) => {
+    req.logout()
+    res.redirect('/login')
+}
+
+export { localCredentialsAuthenticationHandler, logoutHandler }

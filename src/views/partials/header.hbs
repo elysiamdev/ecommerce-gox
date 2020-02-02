@@ -4,10 +4,29 @@
 			<div class="header-top-right collapsed-block text-right  col-sm-6 col-xs-6 compact-hidden">
 				<div class="tabBlock1" id="TabBlock-1">
 					<ul class="top-link list-inline">
-						<li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!"><span>Welcome Customer!</span></a></li>
-						<li class="signin"><a href="/login" class="top-link-checkout" title="Entrar"><span>Entrar</span></a></li>
-						<li class="register"><a href="/registrar" title="Criar conta"><span>Criar conta</span></a></li>
-					</ul>
+						{{#if isAuthenticated }}
+							<li class="wishlist hidden-xs">
+								<a href="#" id="wishlist-total" class="top-link-wishlist" title="Welcome Customer!">
+									<span>Welcome {{user.name}}</span>
+								</a>
+							</li>
+							<li class="signin">
+								<a href="/minha-conta/logout" class="top-link-checkout" title="Sair">
+									<span>Sair</span>
+								</a>
+							</li>
+						{{else}}
+							<li class="signin">
+								<a href="/login" class="top-link-checkout" title="Entrar">
+									<span>Entrar</span>
+								</a>
+							</li>
+							<li class="register">
+								<a href="/registrar" title="Criar conta">
+									<span>Criar conta</span>
+								</a>
+							</li>
+						{{/if}}
 				</div>
 			</div>
 		</div>

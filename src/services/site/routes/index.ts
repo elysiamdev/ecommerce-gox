@@ -16,6 +16,13 @@ import { localCredentialsAuthenticationHandler } from '@services/auth/request_ha
 
 const router = express.Router()
 
+router.use((req: any, res: any, next: any) => {
+    if(req.user) {
+        res.locals.isAuthenticated = true
+        res.locals.user = { name:'Nome do usuário' }
+    }
+    next()
+})
 router.get('/', homeHandler)
 router.get('/produto/:slug', productHandler)
 router.get('/contato', contactHandler)
