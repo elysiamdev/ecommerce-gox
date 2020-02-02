@@ -49,7 +49,7 @@ export const deleteService = async (id: number) => {
         }
     }
 }
-export const getAllService = async (data: any) => {
+export const getAllService = async () => {
     const response: any = await productsRepository.findAll()
     return {
         success: response.length > 0,
@@ -57,10 +57,16 @@ export const getAllService = async (data: any) => {
     }
 }
 export const getBySlugService = async (slugUrl: any) => {
-    const response: any = await productsRepository.findByColumn('slug_url', slugUrl)
+    const response: any = await productsRepository.findByColumn('slug', slugUrl)
+    if(response) {
+        return {
+            success: 1,
+            data: response
+        }
+    }
     return {
-        success: response.length,
-        data: response
+        success: 0,
+        data: undefined
     }
 }
 export default {
