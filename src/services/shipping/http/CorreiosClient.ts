@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
+import { CorreiosRequestParams } from '../models/CorreiosRequestParams'
 
 const BASE_URL = 'http://ws.correios.com.br/calculador'
 

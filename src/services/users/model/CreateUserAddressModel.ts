@@ -6,7 +6,6 @@ interface CreateUserAddressModel {
     readonly state: string
     readonly postal_code: string
     readonly country: string
-    readonly address_type_id: number
     readonly user_profile_id: number
 }
 

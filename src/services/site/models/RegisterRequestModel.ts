@@ -1,5 +1,6 @@
 interface RegisterRequestModel {
     readonly fullname: string
+    readonly cpf: string
     readonly email: string
     readonly telephone: string
     readonly password: string

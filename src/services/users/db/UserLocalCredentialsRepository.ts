@@ -1,5 +1,5 @@
 import { CreateUserLocalCredentialsModel } from "../model"
-import { NotFoundError } from "@logic/errors"
+import { NotUniqueDbError } from "../../../logic/errors"
 
 class UserLocalCredentialsRepository {
     readonly client: any
@@ -9,9 +9,20 @@ class UserLocalCredentialsRepository {
     }
 
     async create(credentials: CreateUserLocalCredentialsModel): Promise<{ id: number }> {
-        const [ id ] = await this.client.insert(credentials).returning('id')
+        try {
 
-        return { id: id }
+            const [ id ] = await this.client.insert(credentials).returning('id')
+    
+            return { id: id }
+        }
+        catch(error) {
+            if(error.code == '23505') {
+                throw new NotUniqueDbError('Email já registrado', { errors: { email: ['Email já registrado']}})
+            }
+            else {
+                throw error
+            }
+        }
     }
 
     async findByEmail(email: string): Promise<{ id: number, password: string, user_profile_id: number}|null> {

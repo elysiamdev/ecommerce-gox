@@ -12,7 +12,7 @@ import {
     cartHandler,
     checkoutHandler
  } from '../request_handlers'
-import { localCredentialsAuthenticationHandler } from '@services/auth/request_handlers'
+import { localCredentialsAuthenticationHandler } from '../../auth/request_handlers'
 
 const router = express.Router()
 

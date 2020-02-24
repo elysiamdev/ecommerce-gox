@@ -1,15 +1,16 @@
-import knex from "@database/index"
-import { UnitOfWork } from "@logic/UnitOfWork"
-import { mapRequestBodyIntoRegisterRequestModel, mapRequestBodyIntoCreateUserAddressRequestModel } from "@services/site/mappers"
+import knex from "../../../server/db"
+import { mapRequestBodyIntoRegisterRequestModel, mapRequestBodyIntoCreateUserAddressRequestModel } from "../../site/mappers"
 import { makeCreateUserProfile } from "../services/createUserProfile"
 import { makeCreateUserLocalCredentials } from "../services/createUserLocalCredentials"
 import { makeRegisterUser } from "../services/registerUser"
 import { hashPassword } from "../services/hashPassword"
-import { RegisterRequestModel } from "@services/site/models"
-import { InputValidationError } from "@logic/errors"
+import { RegisterRequestModel } from "../../site/models"
+import { InputValidationError } from "../../../logic/errors"
 import { makeCreateUserAddress } from "../services/createUserAddress"
 import { AddressRepository } from "../db/repositories"
 import { makeDeleteUserAddress } from "../services/deleteUserAddress"
+import { makeFindUserAddresses } from "../services/findUserAddresses"
+import { createUnitOfWork } from "../../../logic/createUnitOfWork"
 
 const ensureAgreed = (registerRequest: RegisterRequestModel) => {
     if(!registerRequest.agreed) {
@@ -18,12 +19,11 @@ const ensureAgreed = (registerRequest: RegisterRequestModel) => {
 }
 
 export const registerHandler = async (req: any, res: any, next: any) => {
-    const unitOfWork = new UnitOfWork(knex)
-    await unitOfWork.initialize()
+    const unitOfWork = await createUnitOfWork(knex)()
     
     const registerRequestModel = mapRequestBodyIntoRegisterRequestModel(req.body)
-    const createUserProfile = makeCreateUserProfile(unitOfWork.getUserProfileRepository())
-    const createUserCredentials = makeCreateUserLocalCredentials(unitOfWork.getUserLocalCredentialsRepository(), hashPassword)
+    const createUserProfile = makeCreateUserProfile(unitOfWork.UserProfileRepository)
+    const createUserCredentials = makeCreateUserLocalCredentials(unitOfWork.UserLocalCredentialsRepository, hashPassword)
     const registerUser = makeRegisterUser(createUserProfile, createUserCredentials)
 
     try {
@@ -40,6 +40,14 @@ export const registerHandler = async (req: any, res: any, next: any) => {
     }
 }
 
+export const listAddressesHandler = async (req: any, res: any, next: any) => {
+    const findUserAddresses = makeFindUserAddresses(new AddressRepository(knex))
+    const userId = req.user.id
+    const addresses = await findUserAddresses(userId)
+
+    res.status(200).send({ addresses })
+}
+
 export const createAddressHandler = async (req: any, res: any, next: any) => {
     const createUserAddress = makeCreateUserAddress(new AddressRepository(knex))
     const createUserAddressRequestModel = mapRequestBodyIntoCreateUserAddressRequestModel(req.body)
@@ -47,7 +55,6 @@ export const createAddressHandler = async (req: any, res: any, next: any) => {
 
     try {
         const address = await createUserAddress(createUserAddressRequestModel, userId)
-
         res.status(201).send(address)
     }
     catch(error) {

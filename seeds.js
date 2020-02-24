@@ -1,4 +1,10 @@
-import { seedTables } from './tests/helpers'
+import knex from './src/server/db'
 
-seedTables()
-    .then(result => console.log(result))
+const config = { directory: 
+    './tests/seeds',
+}
+
+knex.seed.run(config)
+    .then(() => {
+        knex.destroy()
+    })

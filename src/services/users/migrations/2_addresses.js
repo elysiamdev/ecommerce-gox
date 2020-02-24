@@ -10,8 +10,8 @@ exports.up = function(knex) {
             table.string('state', 100).notNullable()
             table.string('postal_code', 32).notNullable()
             table.string('country', 32).notNullable()
-            table.timestamp('created_at').defaultTo(knex.fn.now())
             table.integer('user_profile_id').references('id').inTable('users_profiles').index()
+            table.timestamp('created_at').defaultTo(knex.fn.now())
         })
 };
 

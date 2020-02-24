@@ -1,6 +1,6 @@
-import knex from '@database/index'
+import knex from '../../../../src/server/db'
 import { seedTables, clearDb } from '../../../helpers'
-import { ProductsRepository } from '@services/products/db/ProductsRepository'
+import { ProductsRepository } from '../../../../src/services/products/db/ProductsRepository'
 
 describe('Users :: db :: ProductsRepository', () => {
     const repository = new ProductsRepository(knex)
@@ -17,4 +17,5 @@ describe('Users :: db :: ProductsRepository', () => {
 
 beforeEach(async () => await seedTables())
 afterEach(async () => await clearDb('products'))
+afterEach(async () => await clearDb('users_profiles'))
 afterAll(() => knex.destroy())

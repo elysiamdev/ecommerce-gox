@@ -1,17 +1,16 @@
 import { seedTables, clearDb } from '../../../helpers'
-import { makeCreateUserProfile } from '@services/users/services/createUserProfile'
-import { makeCreateUserLocalCredentials } from '@services/users/services/createUserLocalCredentials'
-import { makeRegisterUser } from '@services/users/services/registerUser'
-import knex from '@database/index'
-import { UnitOfWork } from '@logic/UnitOfWork'
+import { makeCreateUserProfile } from '../../../../src/services/users/services/createUserProfile'
+import { makeCreateUserLocalCredentials } from '../../../../src/services/users/services/createUserLocalCredentials'
+import { makeRegisterUser } from '../../../../src/services/users/services/registerUser'
+import knex from '../../../../src/server/db'
+import { createUnitOfWork } from '../../../../src/logic/createUnitOfWork'
 
 describe('Users :: services :: createUserProfile', () => {
     test('creates a valid user profile', async () => {
-        const unitOfWork = new UnitOfWork(knex)
-        await unitOfWork.initialize()
+        const unitOfWork = await createUnitOfWork(knex)()
 
-        const createUserProfile = makeCreateUserProfile(unitOfWork.getUserProfileRepository())
-        const createUserCredentials = makeCreateUserLocalCredentials(unitOfWork.getUserLocalCredentialsRepository(), (password: string) => password)
+        const createUserProfile = makeCreateUserProfile(unitOfWork.UserProfileRepository)
+        const createUserCredentials = makeCreateUserLocalCredentials(unitOfWork.UserLocalCredentialsRepository, (password: string) => password)
         const registerUser = makeRegisterUser(createUserProfile, createUserCredentials)
 
         const profile = { 
@@ -19,13 +18,15 @@ describe('Users :: services :: createUserProfile', () => {
             email: 'bruno@email.com', 
             password: 'securep@ssword123', 
             confirm: 'securep@ssword123', 
-            telephone: '+555134567890' }
+            telephone: '+555134567890',
+            cpf: "489.356.820-55",
+            agreed: true }
 
         const user = await registerUser(profile)
 
         unitOfWork.commit()
         
-        expect(user?.id).toBe(1)
+        expect(user?.id).toBeDefined()
     })
 })
 

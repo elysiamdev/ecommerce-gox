@@ -16,7 +16,7 @@ export const updateProductRequest = async (req: any, res: any, next: any) => {
     res.json(response).status(200)
 }
 export const getProductsRequest = async (req: any, res: any, next: any) => {
-    let response = await getAllService(req.body)
+    let response = await getAllService()
     res.json(response);
 }
 export const deleteProductRequest = async (req: any, res: any, next: any) => {

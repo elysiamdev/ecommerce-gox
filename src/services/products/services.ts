@@ -1,7 +1,7 @@
 import { validateInsert, validateUpdate } from './helpers/validate'
 import { ProductsRepository } from './db/ProductsRepository'
 import slug from 'slug'
-import knex from '@database/index'
+import knex from '../../server/db'
 
 const productsRepository = new ProductsRepository(knex)
 

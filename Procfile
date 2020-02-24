@@ -1,0 +1,1 @@
+web: yarn ts-node --transpile-only src/index.ts NODE_ENV=production

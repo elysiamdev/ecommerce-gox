@@ -2,7 +2,6 @@
 <div class="main-container container">
     <ul class="header-main ">
         <li class="home"><a href="#">Home   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-        <li class="home"><a href="#">Account   </a><i class="fa fa-angle-right" aria-hidden="true"></i></li>
         <li>  Login</li>
     </ul>
     
@@ -14,33 +13,32 @@
                     <div class="row">
                         <div class="col-sm-6 new-customer">
                             <div class="well">
-                                <h2><i class="fa fa-file-o" aria-hidden="true"></i> New Customer</h2>
-                                <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+                                <h2><i class="fa fa-file-o" aria-hidden="true"></i> Novo cliente</h2>
+                                <p>Crie sua conta para fazer compras no site</p>
                             </div>
                             <div class="bottom-form">
-                                <a href="#" class="btn btn-default pull-right">Continue</a>
+                                <a href="/registrar" class="btn btn-default pull-right">Criar conta</a>
                             </div>
                         </div>
                         
-                        <form action="/login" method="post" enctype="multipart/x-www-form-urlencoded">
+                        <form action="{{actionUrl}}" method="post" enctype="multipart/x-www-form-urlencoded">
                             <div class="col-sm-6 customer-login">
                                 <div class="well">
-                                    <h2><i class="fa fa-file-text-o" aria-hidden="true"></i> Returning Customer</h2>
-                                    <p><strong>I am a returning customer</strong></p>
+                                    <h2><i class="fa fa-file-text-o" aria-hidden="true"></i> Já possuo uma conta</h2>
                                     {{#if error.message }}
                                         <div class="alert alert-danger">{{error.message}}</div>
                                     {{/if}}
                                     <div class="form-group">
-                                        <label class="control-label " for="input-email">E-Mail Address</label>
+                                        <label class="control-label " for="input-email">Email</label>
                                         <input type="text" name="email" value="" id="input-email" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label " for="input-password">Password</label>
+                                        <label class="control-label " for="input-password">Senha</label>
                                         <input type="password" name="password" value="" id="input-password" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="bottom-form">
-                                    <a href="#" class="forgot">Forgotten Password</a>
+                                    {{!-- <a href="#" class="forgot">Esqueceu sua senha?</a> --}}
                                     <input type="submit" value="Login" class="btn btn-default pull-right" />
                                 </div>
                             </div>

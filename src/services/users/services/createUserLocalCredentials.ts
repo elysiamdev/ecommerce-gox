@@ -1,10 +1,10 @@
 import { UserLocalCredentialsRepository } from "../db/repositories"
 import { validateLocalCredentials } from "../providers/validator"
-import { InputValidationError } from "@logic/errors"
+import { InputValidationError } from "../../../logic/errors"
 
 const ensureValidLocalCredentials = (credentials: { email: string, password: string, confirm: string }) => {
     const validationResult = validateLocalCredentials(credentials)
-
+    
     if(!validationResult.isValid) {
         throw new InputValidationError('InputValidationError', { errors: validationResult.errors })
     }

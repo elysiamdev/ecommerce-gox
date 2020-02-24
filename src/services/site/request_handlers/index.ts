@@ -1,11 +1,11 @@
-import knex from "@database/index"
-import { ProductsRepository } from "@services/products/db/ProductsRepository"
-import { makeFindUserAddresses } from "@services/users/services/findUserAddresses"
-import { AddressRepository } from "@services/users/db/repositories"
-import { SharedData } from "@logic/SharedData"
-import { getBySlugService as getProductBySlug, getAllService as getAllProducts } from "@services/products/services"
-import { NotFoundError } from "@logic/errors"
-import useCart from "@services/cart/middleware/useCart"
+import knex from "../../../server/db/index"
+import { ProductsRepository } from "../../products/db/ProductsRepository"
+import { makeFindUserAddresses } from "../../users/services/findUserAddresses"
+import { AddressRepository } from "../../users/db/repositories"
+import { SharedData } from "../../../logic/SharedData"
+import { getBySlugService as getProductBySlug, getAllService as getAllProducts } from "../../products/services"
+import { NotFoundError } from "../../../logic/errors"
+import useCart from "../../cart/middleware/useCart"
 
 export const homeHandler = useCart(async (req: any, res: any, next: any) => {
     const sd = new SharedData()
@@ -63,8 +63,9 @@ export const searchHandler = useCart((req: any, res: any, next: any) => {
 export const loginHandler = useCart((req: any, res: any, next: any) => {
     const sd = new SharedData()
     sd.add("cart", { products: req.user_cart.items })
+    const actionUrl = ['/login', '/login?checkout=true'].includes(req.originalUrl)? req.originalUrl : '/login'
 
-    res.render('site/login', { sharedData: sd.toJson() })
+    res.render('site/login', { sharedData: sd.toJson(), actionUrl })
 })
 
 export const registerHandler = useCart((req: any, res: any, next: any) => {
@@ -97,14 +98,24 @@ export const cartHandler = useCart(async (req: any, res: any, next: any) => {
 
 export const checkoutHandler = useCart(async (req: any, res: any, next: any) => {
     const isLoggedIn = req.user? true : false
+
+    if(!isLoggedIn) {
+        return res.redirect('/login?checkout=true')
+    }
+
+    if(req.user_cart.items.length === 0) {
+        return res.redirect('/carrinho')
+    }
+    
     const findUserAddresses = makeFindUserAddresses(new AddressRepository(knex))
     const sd = new SharedData()
+    const userAddresses = isLoggedIn? await findUserAddresses(req.user.id) : []
     sd.add("cart", { products: req.user_cart.items })
     sd.add("checkout_form", {
-        isLoggedIn,
-        user_addresses: isLoggedIn? await findUserAddresses(req.user.id) : [],
-        current_step: 1,
-        use_shipping_address: true
+        data: { 
+            user_addresses: userAddresses
+        },
+        current_step: userAddresses.length > 0? 'CHECKOUT_SELECT_SHIPPING_ADDRESS_STEP' : 'CHECKOUT_CREATE_SHIPPING_ADDRESS_STEP',
     })
 
     res.render('site/checkout', { sharedData: sd.toJson() })

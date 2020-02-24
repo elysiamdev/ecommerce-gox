@@ -8,6 +8,7 @@ switch(process.env.NODE_ENV) {
         break;
     case 'test':
         options = dbConfig.test_database
+        break
     default:
         options = dbConfig.local_database
 }

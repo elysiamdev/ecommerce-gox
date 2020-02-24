@@ -1,4 +1,3 @@
-import { cartHandler } from "@services/site/request_handlers"
 
 class SessionCartRepository {
     readonly session: any

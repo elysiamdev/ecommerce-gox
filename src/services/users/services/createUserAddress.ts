@@ -1,7 +1,7 @@
 import { AddressRepository } from "../db/repositories"
-import { CreateUserAddressRequestModel, CreateUserAddressModel } from "../model"
+import { CreateUserAddressRequestModel } from "../model"
 import { validateUserAddress } from "../providers/validator"
-import { InputValidationError } from "@logic/errors"
+import { InputValidationError } from "../../../logic/errors"
 
 const ensureValid = (address: CreateUserAddressRequestModel) => {
     const { isValid, errors } = validateUserAddress(address)

@@ -6,6 +6,7 @@ const config = {
         './src/services/products/migrations',
         './src/services/coupom/migrations',
         './src/services/cart/migrations',
+        './src/services/orders/migrations',
     ],
     sortDirsSeparately: true
 }

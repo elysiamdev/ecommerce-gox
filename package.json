@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "engines": {
+        "node": "12.x"
+    },
     "scripts": {
         "migration": "nodemon --watch ./src --exec ts-node src/migrations/index.ts NODE_ENV=dev",
         "start": "nodemon --watch ./src --exec ts-node src/index.ts NODE_ENV=dev",
@@ -15,10 +18,13 @@
         "db:create": "createdb -O eco eco_dev && psql -d eco_dev -c 'CREATE EXTENSION unaccent;\n CREATE TEXT SEARCH CONFIGURATION unaccent_portuguese ( copy=portuguese ); \nALTER TEXT SEARCH CONFIGURATION unaccent_portuguese ALTER MAPPING FOR hword, hword_part, word WITH unaccent, portuguese_stem;'",
         "db:test:drop": "dropdb eco_test",
         "db:test:create": "createdb -O eco eco_test && psql -d eco_test -c 'CREATE EXTENSION unaccent;\n CREATE TEXT SEARCH CONFIGURATION unaccent_portuguese ( copy=portuguese ); \nALTER TEXT SEARCH CONFIGURATION unaccent_portuguese ALTER MAPPING FOR hword, hword_part, word WITH unaccent, portuguese_stem;'",
-        "test": "jest --detectOpenHandles --maxWorks=10 --forceExit"
+        "db:test:migrate": "NODE_ENV=test ts-node ./migrations.js",
+        "db:test:seed": "NODE_ENV=test ts-node ./seeds.js",
+        "db:dev:seed": "NODE_ENV=development ts-node ./seeds.js",
+        "test": "jest --detectOpenHandles --maxWorkers=10 --forceExit",
+        "test:watch": "jest --watch --detectOpenHandles --maxWorkers=10 --forceExit"
     },
     "dependencies": {
-        "@types/express-handlebars": "^3.1.0",
         "add": "^2.0.6",
         "axios": "^0.19.0",
         "bcrypt": "^3.0.7",
@@ -27,6 +33,7 @@
         "connect-redis": "^4.0.4",
         "cookie-parser": "^1.4.4",
         "cpf-check": "^3.0.0",
+        "cpf-cnpj-validator": "^0.1.0",
         "date-and-time": "^0.10.0",
         "express": "^4.17.1",
         "express-handlebars": "^3.1.0",
@@ -53,6 +60,7 @@
         "xml-js": "^1.6.11"
     },
     "devDependencies": {
+        "@types/express-handlebars": "^3.1.0",
         "@types/axios": "^0.14.0",
         "@types/bcrypt": "^3.0.0",
         "@types/connect-redis": "^0.0.13",
@@ -60,27 +68,22 @@
         "@types/date-and-time": "^0.6.0",
         "@types/express": "^4.17.1",
         "@types/express-session": "^1.15.16",
+        "@types/hapi__joi": "^16.0.11",
         "@types/ioredis": "^4.14.6",
-        "@types/jest": "24.0.23",
+        "@types/jest": "25.1.2",
         "@types/jsonwebtoken": "^8.3.4",
         "@types/passport": "^1.0.2",
         "@types/passport-local": "^1.0.33",
         "@types/react-dom": "16.9.4",
         "@types/slug": "^0.9.1",
         "@types/supertest": "2.0.8",
+        "cross-env": "^7.0.0",
         "dotenv": "^8.1.0",
-        "jest": "24.9.0",
+        "jest": "25.1.0",
         "pg": "7.14.0",
         "supertest": "4.0.2",
-        "ts-jest": "24.2.0",
-        "ts-node": "^8.3.0",
-        "typescript": "~3.7.0"
-    },
-    "_moduleAliases": {
-        "@models": "src/models/",
-        "@database": "src/server/db",
-        "@providers": "src/providers",
-        "@services": "src/services",
-        "@logic": "src/logic"
+        "ts-jest": "25.2.0",
+        "ts-node": "8.6.2",
+        "typescript": "3.7.5"
     }
 }

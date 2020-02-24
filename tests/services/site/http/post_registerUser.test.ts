@@ -1,6 +1,7 @@
 import supertest from 'supertest'
 import createServer from '../../../../src/server'
 import { clearDb, seedTables } from '../../../helpers'
+import knex from '../../../../src/server/db'
 
 const server = createServer()
 const request = supertest(server)
@@ -13,7 +14,9 @@ describe('POST /api/v1/register', () => {
                 email: 'bruno@email.com', 
                 password: 'securep@ssword123', 
                 confirm: 'securep@ssword123', 
-                telephone: '+555134567890' 
+                telephone: '+555134567890',
+                cpf: "489.356.820-55",
+                agreed: true
             }
     
             const response = await request
@@ -32,7 +35,8 @@ describe('POST /api/v1/register', () => {
                 email: 'bruno@email', 
                 password: 'securep@ssword123', 
                 confirm: 'securep@ssword123', 
-                telephone: '+555134567890' 
+                telephone: '+555134567890',
+                agreed: true
             }
     
             const response = await request
@@ -47,3 +51,4 @@ describe('POST /api/v1/register', () => {
 
 beforeEach(async () => await seedTables())
 afterEach(async () => await clearDb('users_profiles'))
+afterAll(() => knex.destroy())

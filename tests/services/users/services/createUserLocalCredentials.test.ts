@@ -1,12 +1,11 @@
-import { UserProfileRepository } from '@services/users/db/UserProfileRepository'
-import { seedTables, clearDb } from '../../../helpers'
-import { makeCreateUserLocalCredentials } from '@services/users/services'
-import { CreateUserProfileModel, CreateUserLocalCredentialsModel } from '@services/users/model'
-import { InputValidationError } from '@logic/errors'
+import { makeCreateUserLocalCredentials } from '../../../../src/services/users/services'
+import { CreateUserLocalCredentialsModel } from '../../../../src/services/users/model'
+import { InputValidationError } from '../../../../src/logic/errors'
 
 describe('Users :: services :: createUserProfile', () => {
     const repositoryMock = { 
         client: {}, 
+        findByEmail: async () => ({ id: 0, password: "", user_profile_id: 0 }),
         create: (profile: CreateUserLocalCredentialsModel) => {
                 return Promise.resolve({ id: 1 })
             }   

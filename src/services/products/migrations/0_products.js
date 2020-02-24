@@ -7,7 +7,6 @@ CREATE INDEX idx_searchable_column_fts_products ON public.products USING gin(sea
 `;
 
 exports.up = function (knex) {
-    console.log("Creating products")
     return knex.schema
         .createTable('products', (table) => {
             table.increments('id')

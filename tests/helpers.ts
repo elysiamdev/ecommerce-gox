@@ -1,4 +1,7 @@
 import knex from '../src/server/db'
+import { makeRegisterUser } from '@services/users/services/registerUser'
+import { makeCreateUserProfile, makeCreateUserLocalCredentials } from '@services/users/services'
+import { UserProfileRepository, UserLocalCredentialsRepository } from '@services/users/db/repositories'
 
 const produtcs_seed = [
     { name: 'Asa de Mosca Gigante',
@@ -55,16 +58,66 @@ const produtcs_seed = [
             buy_value: 70,
             sell_value: 70 },
 ]
+
 const seedTables = async () => {
     await knex('products')
         .insert(produtcs_seed)
 
-        await knex('address_types')
-                .insert([
-                        { name: 'Endereço de Cobrança'},
-                        { name: 'Endereço de Entrega'}
-                ])
+    await knex('address_types')
+            .insert([
+                    { name: 'Endereço de Cobrança'},
+                    { name: 'Endereço de Entrega'}
+            ])
+
+    const createUser = makeRegisterUser(makeCreateUserProfile(new UserProfileRepository(knex)), makeCreateUserLocalCredentials(new UserLocalCredentialsRepository(knex), (p: string) => p))
+    const user = await createUser({ fullname: "Um Usuário", cpf: "715.583.180-89", email: "test@test.com", password: "abc123456", confirm: "abc123456"})
+    await knex('addresses').insert([
+        {
+            name: "Um Usuário",
+            street: "Rua de teste",
+            number: "123",
+            city: "Test City",
+            state: "State of Testing",
+            country: "Testland",
+            postal_code: "99999-999",
+            user_profile_id: user?.id
+        },
+        {
+            name: "Um Usuário Endereço2",
+            street: "Rua de teste",
+            number: "456",
+            city: "Test City",
+            state: "State of Testing",
+            country: "Testland",
+            postal_code: "99999-999",
+            user_profile_id: user?.id
+        },
+    ])
     
+    knex('orders').insert({ 
+        reference: "TEST_ORDER_123", 
+        user_profile_id: user?.id,
+        shipping_address_name: "Um Usuário",
+        shipping_address_street: "Rua de teste",
+        shipping_address_number: "123",
+        shipping_address_city: "Test City",
+        shipping_address_state: "State of Testing",
+        shipping_address_country: "Testland",
+        shipping_address_postal_code: "99999-999",
+        billing_address_name: "Um Usuário Endereço2",
+        billing_address_street: "Rua de teste",
+        billing_address_number: "456",
+        billing_address_city: "Test City",
+        billing_address_state: "State of Testing",
+        billing_address_country: "Testland",
+        billing_address_postal_code: "99999-999",
+    }).then((order: any) => knex('orders_products').insert(
+        { 
+            order_id: order?.id,
+            product_id: 1,
+            quantity: 1
+        }
+    ))
 }
 
 const clearDb = (table: string) => {

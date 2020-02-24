@@ -14,7 +14,7 @@ const validateUserCredentials = async (email: any, password: any, done: any) => 
         const credentials = await localCredentialsRepository.findByEmail(email)
 
         if(!credentials) {
-            return done(null, false, { message: 'User not found' })
+            return done(null, false, { message: 'Não encontramos uma conta registrada com este email!' })
         }
 
         const match = await matchUserPassword(password, credentials?.password)
@@ -22,7 +22,7 @@ const validateUserCredentials = async (email: any, password: any, done: any) => 
         if(match) {
             return done(null, { id: credentials.user_profile_id })
         }
-        return done(null, false, { message: 'Wrong credentials'})
+        return done(null, false, { message: 'Email ou senha incorretos!'})
     }
     catch(error) {
         return done(error)

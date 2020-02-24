@@ -33,12 +33,26 @@ class ProductsRepository {
         return true
     }
 
+    async exists(id: number): Promise<boolean> {
+        const result = await this.client('products').where('id', id).first()
+
+        if(result) {
+            return true
+        }
+        return false
+    }
+
+    async exist(ids: Array<number>): Promise<Array<{ exists: boolean, id: number}>> {
+        const result = await Promise.all(ids.map(async id => ({ id, exists: await this.exists(id)})))
+
+        return result
+    }
+
     async search(term: string): Promise<Array<{ id: number, name: string, description: string, sell_value: string }>> {
         const found = await this.client('products').select('id', 'name', 'description', 'sell_value').where(function (q: any) {
             q.whereRaw("plainto_tsquery('unaccent_portuguese', unaccent(?)) @@ products.searchable_column_fts", [term])
         })
 
-        console.log(found)
         return found
     }
 }

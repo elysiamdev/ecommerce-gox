@@ -1,10 +1,22 @@
 import validate from 'validate.js'
+import { cpf } from 'cpf-cnpj-validator'
+
+validate.validators.cpf = function (value: any, options: any, key: any, attributes: any) {
+    if(cpf.isValid(value, true)) {
+        return null
+    }
+    return "inválido"
+}
 
 export const validateProfile = (profile: { fullname: string }): { isValid: boolean, errors: {}} => {
     const options = {
         fullname: {
             presence: { allowEmpty: false },
         },
+        cpf: {
+            presence: { allowEmpty: false },
+            cpf: true
+        }
     }
 
     const validationResult = validate(profile, options)

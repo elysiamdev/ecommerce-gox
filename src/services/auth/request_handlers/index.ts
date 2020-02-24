@@ -9,6 +9,12 @@ const localCredentialsAuthenticationHandler = (req: any, res: any, next: any) =>
         req.logIn(user, (e: any) => {
             if(e) next(e)
 
+            const { checkout } = req.query
+
+            if(checkout) {
+                return res.redirect('/finalizar-pedido')
+            }
+
             return res.redirect('/minha-conta')
         })
     })(req, res, next)

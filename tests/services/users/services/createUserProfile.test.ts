@@ -1,11 +1,10 @@
-import { UserProfileRepository } from '@services/users/db/UserProfileRepository'
-import { seedTables, clearDb } from '../../../helpers'
-import { makeCreateUserProfile } from '@services/users/services/createUserProfile'
-import { CreateUserProfileModel } from '@services/users/model'
+import { makeCreateUserProfile } from '../../../../src/services/users/services/createUserProfile'
+import { CreateUserProfileModel } from '../../../../src/services/users/model'
 
 describe('Users :: services :: createUserProfile', () => {
     const repositoryMock = { 
         client: {}, 
+        findById: async () => ({ id: 1, fullname: "None" }),
         create: (profile: CreateUserProfileModel) => {
                 expect(profile.fullname).toBe('Bruno Schmidt')
                 return Promise.resolve({ id: 1 })
@@ -17,6 +16,7 @@ describe('Users :: services :: createUserProfile', () => {
     test('creates a valid user profile', async () => {
         const profile = { 
             fullname: 'Bruno Schmidt', 
+            cpf: "489.356.820-55",
             email: 'bruno@email.com', 
             password: 'securep@ssword123', 
             confirm: 'securep@ssword123', 

@@ -5,42 +5,19 @@ class UnitOfWork {
     private trx: any
     private knex: any
     private initialized: boolean = false
-    UserProfileRepository?: UserProfileRepository
-    UserLocalCredentialsRepository?: UserLocalCredentialsRepository
+    UserProfileRepository: UserProfileRepository
+    UserLocalCredentialsRepository: UserLocalCredentialsRepository
+    UserAddressRepository: AddressRepository
+    OrdersRepository: OrdersRepository
+    OrdersProductsRepository: OrdersProductsRepository
 
-    private ensureInitialized(): void {
-        if(!this.isInitialized()) {
-            throw new Error('UnitOfWork should be initialized first.')
-        }
-    }
-
-    constructor(knex: any) {
-        this.knex = knex
-    }
-
-    async initialize() {
-        const provider = this.knex.transactionProvider()
-        this.trx = await provider()
-
+    constructor(trx: any) {
+        this.trx = trx
         this.UserProfileRepository = new UserProfileRepository(this.trx)
         this.UserLocalCredentialsRepository = new UserLocalCredentialsRepository(this.trx)
-        this.initialized = true
-    }
-
-    isInitialized(): boolean {
-        return this.initialized
-    }
-
-    getUserProfileRepository(): UserProfileRepository {
-        this.ensureInitialized()
-
-        return this.UserProfileRepository as UserProfileRepository
-    }
-
-    getUserLocalCredentialsRepository(): UserLocalCredentialsRepository {
-        this.ensureInitialized()
-
-        return this.UserLocalCredentialsRepository as UserLocalCredentialsRepository
+        this.OrdersRepository = new OrdersRepository(this.trx)
+        this.UserAddressRepository = new AddressRepository(this.trx)
+        this.OrdersProductsRepository = new OrdersProductsRepository(this.trx)
     }
 
     commit() {
