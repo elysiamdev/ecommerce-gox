@@ -57,7 +57,10 @@
         "striptags": "^3.1.1",
         "validar-cpf": "^2.1.1",
         "validate.js": "^0.13.1",
-        "xml-js": "^1.6.11"
+        "xml-js": "^1.6.11",
+        "pg": "7.14.0",
+        "ts-node": "8.6.2",
+        "typescript": "3.7.5"
     },
     "devDependencies": {
         "@types/express-handlebars": "^3.1.0",
@@ -80,10 +83,7 @@
         "cross-env": "^7.0.0",
         "dotenv": "^8.1.0",
         "jest": "25.1.0",
-        "pg": "7.14.0",
         "supertest": "4.0.2",
-        "ts-jest": "25.2.0",
-        "ts-node": "8.6.2",
-        "typescript": "3.7.5"
+        "ts-jest": "25.2.0"
     }
 }
