@@ -1,4 +1,5 @@
-import { UserProfileRepository, UserLocalCredentialsRepository } from "@services/users/db/repositories"
+import { UserProfileRepository, UserLocalCredentialsRepository, AddressRepository } from "../services/users/db/repositories"
+import { OrdersRepository, OrdersProductsRepository } from "../services/orders/repositories"
 
 class UnitOfWork {
     private trx: any

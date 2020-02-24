@@ -1,9 +1,5 @@
-import { Request, Response, NextFunction } from "express";
 import { TResponse } from '../types'
 
-export interface IMiddelware {
-    (req: Request, res: Response, next: NextFunction): void
-}
 
 export interface IModelData {
     (data?: any): Promise<any>

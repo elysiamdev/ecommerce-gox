@@ -1,9 +1,6 @@
 import { Application } from "express";
 import { rootPath } from '../config'
 import fs from 'fs'
-import { IMiddelware } from "@logic/interfaces";
-
-const middlewarePattern: IMiddelware = (req, res, next) => next()
 
 const servicesList = fs.readdirSync(`${rootPath}/services/`);
 

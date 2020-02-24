@@ -1,4 +1,4 @@
-import passport from '@services/auth/passport'
+import passport from '../passport'
 
 const localCredentialsAuthenticationHandler = (req: any, res: any, next: any) => { 
     passport.authenticate('local', function (error, user, info) {

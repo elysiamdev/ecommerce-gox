@@ -1,4 +1,3 @@
-import redis from '@database/redis'
 import { getUserCartFromSession } from '../services/getUserCartFromSession'
 
 const useCart = (requestHandler: Function) => (req: any, res: any, next: any) => {

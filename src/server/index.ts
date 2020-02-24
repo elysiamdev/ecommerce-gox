@@ -1,7 +1,7 @@
 import express from 'express'
 import middlewares from './middlewares'
 import services from '../services'
-import { errorHandler } from '@logic/errors/error_handler'
+import { errorHandler } from '../logic/errors/error_handler'
 
 const serverEngine = () => {
 

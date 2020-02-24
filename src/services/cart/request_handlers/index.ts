@@ -1,7 +1,7 @@
 import { makeAddProductIntoCart } from "../services/addProductIntoCart"
 import { SessionCartRepository } from "../repositories/SessionCartRepository"
 import { makeRemoveProductFromCart } from "../services/removeProductFromCart"
-import { InputValidationError } from "@logic/errors"
+import { InputValidationError } from "../../../logic/errors"
 import { makeIncrementProductQuantity, makeDecrementProductQuantity } from "../services/incrementProductQuantity"
 
 const addToCartHandler = async (req: any, res: any, next: any) => {

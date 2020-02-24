@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { registerHandler, createAddressHandler, deleteAddressHandler } from '@services/users/request_handlers'
-import { protectHandler } from '@services/auth/middlewares/protectHandler'
-import { checkoutHandler } from '@services/checkout/request_handlers'
-import { addToCartHandler, removeProductFromCartHandler, updateProductQuantityHandler } from '@services/cart/request_handlers'
-import { calculateShippingCostHandler } from '@services/shipping/request_handlers'
+import { registerHandler, createAddressHandler, deleteAddressHandler } from '../../users/request_handlers'
+import { protectHandler } from '../../auth/middlewares/protectHandler'
+import { checkoutHandler } from '../../checkout/request_handlers'
+import { addToCartHandler, removeProductFromCartHandler, updateProductQuantityHandler } from '../../cart/request_handlers'
+import { calculateShippingCostHandler } from '../../shipping/request_handlers'
 
 const router = Router()
 

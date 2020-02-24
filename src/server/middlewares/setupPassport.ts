@@ -1,4 +1,4 @@
-import passport from '@services/auth/passport'
+import passport from '../../services/auth/passport'
 import { Application } from 'express'
 
 export default (app: Application) => {

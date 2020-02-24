@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
-import { UserLocalCredentialsRepository } from '@services/users/db/repositories'
-import knex from '@database/index'
+import { UserLocalCredentialsRepository } from '../users/db/repositories'
+import knex from '../../server/db'
 
 const matchUserPassword = async (password: any, hash: any) => {
     const match = await bcrypt.compare(password, hash)

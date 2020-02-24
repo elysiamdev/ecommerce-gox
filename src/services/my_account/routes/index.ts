@@ -5,8 +5,8 @@ import {
     listAddressesHandler, 
     newAddressesHandler,
  } from '../request_handlers'
-import { protectHandler } from '@services/auth/middlewares/protectHandler'
-import { logoutHandler } from '@services/auth/request_handlers'
+import { protectHandler } from '../../auth/middlewares/protectHandler'
+import { logoutHandler } from '../../auth/request_handlers'
 
 const router = express.Router()
 
