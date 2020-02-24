@@ -22,7 +22,8 @@
         "db:test:seed": "NODE_ENV=test ts-node ./seeds.js",
         "db:dev:seed": "NODE_ENV=development ts-node ./seeds.js",
         "test": "jest --detectOpenHandles --maxWorkers=10 --forceExit",
-        "test:watch": "jest --watch --detectOpenHandles --maxWorkers=10 --forceExit"
+        "test:watch": "jest --watch --detectOpenHandles --maxWorkers=10 --forceExit",
+        "heroku-postbuild": "yarn db:migrate NODE_ENV=production"
     },
     "dependencies": {
         "add": "^2.0.6",
