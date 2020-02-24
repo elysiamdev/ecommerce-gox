@@ -23,12 +23,7 @@ export const dbConfig = {
         },
     },
     prod_database: {
-        client: 'mysql',
-        connection: {
-            host: settings.PROD_DB_HOST,
-            user: settings.PROD_DB_USER,
-            password: settings.PROD_DB_PASSWORD,
-            database: settings.PROD_DB_DATABASE
-        },
+        client: 'postgresql',
+        connection: process.env.DATABASE_URL
     }
 }
