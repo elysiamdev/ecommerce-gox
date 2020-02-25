@@ -1,6 +1,6 @@
 const loadReactDevJsAssets = function (this: any, context: any, options: any) {
     if(process.env.NODE_ENV === 'production') {
-        return options.fn(this)
+        return context.fn(this)
     }
     else {
         return `<script src="http://localhost:3000/static/js/bundle.js"></script>

@@ -1,9 +1,7 @@
 import { mapErrorToHttpErrorCode, AppError } from "./AppError"
 
 const errorHandler = (error: Error, req: any, res: any, next: any) => {
-    if(process.env.NODE_ENV === 'development') {
-        console.log(error)
-    }
+    console.log(error)
 
     if(error instanceof AppError) {
         res.status(mapErrorToHttpErrorCode(error.code))

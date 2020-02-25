@@ -8,7 +8,7 @@
     },
     "scripts": {
         "migration": "nodemon --watch ./src --exec ts-node src/migrations/index.ts NODE_ENV=dev",
-        "start": "nodemon --watch ./src --exec ts-node src/index.ts NODE_ENV=dev",
+        "start": "nodemon --watch ./src --exec ts-node src/index.ts",
         "build": "tsc",
         "prod": "npm run build && node build/src/index.js",
         "react_link": "rm -rf src/public/site/react_assets/* && rm -rf src/public/admin/admin-ui/* && node react-ui/react_includer/index.js",
@@ -23,7 +23,7 @@
         "db:dev:seed": "NODE_ENV=development ts-node ./seeds.js",
         "test": "jest --detectOpenHandles --maxWorkers=10 --forceExit",
         "test:watch": "jest --watch --detectOpenHandles --maxWorkers=10 --forceExit",
-        "heroku-postbuild": "yarn db:migrate NODE_ENV=production"
+        "heroku-postbuild": "yarn db:migrate NODE_ENV=production && NODE_ENV=production yarn ts-node ./seeds"
     },
     "dependencies": {
         "add": "^2.0.6",

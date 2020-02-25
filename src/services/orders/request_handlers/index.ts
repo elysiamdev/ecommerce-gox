@@ -28,7 +28,7 @@ const createOrderHandler = async (req: any, res: any, next: any) => {
     const createOrderRequestModel = mapRequestDataToRequestModel(req.body)
    
     try {
-        const order = await createOrder(createUoW)(createOrderRequestModel, { id: 1 })
+        const order = await createOrder(createUoW)(createOrderRequestModel, { id: req.user.id })
 
         res.status(201).send(order)
     }

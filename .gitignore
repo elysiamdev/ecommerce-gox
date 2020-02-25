@@ -2,6 +2,5 @@ node_modules
 build
 .tools-versions
 .DS_Store
-public/react-dist
 dump.rdb
 yarn-error.log

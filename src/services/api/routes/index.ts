@@ -19,5 +19,6 @@ router.post('/v1/cart/product/:id', updateProductQuantityHandler)
 router.post('/v1/checkout', checkoutHandler)
 
 router.get('/v1/checkout/shipping', calculateShippingCostHandler)
-router.post('/v1/checkout/orders', createOrderHandler)
+router.post('/v1/checkout/orders', protectHandler, createOrderHandler)
+
 export default router
